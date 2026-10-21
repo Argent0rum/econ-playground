@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inequality: the Lorenz curve and Gini coefficient · Econ Playground</title>
+<meta name="description" content="Set how income is split between five groups and see the Lorenz curve bend and the Gini coefficient move.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 8 of 12</div>
+<h1>Inequality: the Lorenz curve and Gini coefficient</h1>
+<p class="lede">Line everyone up from poorest to richest and add up their incomes as you go. If income were shared equally, that running total would be a straight line. The further it sags, the more unequal the society.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><svg id="fig2"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Lorenz curve</span><span class="key"><i class="" style="background:var(--k4)"></i>Line of perfect equality</span><span class="key"><i class="sq" style="background:var(--k1)"></i>Gap = inequality</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Poorest 20% — income</span><output for="q1"></output></span><input type="range" id="q1" min="1" max="60" step="1" value="8"></label><label class="ctl"><span class="ctl-h"><span>Second 20%</span><output for="q2"></output></span><input type="range" id="q2" min="1" max="60" step="1" value="13"></label><label class="ctl"><span class="ctl-h"><span>Middle 20%</span><output for="q3"></output></span><input type="range" id="q3" min="1" max="60" step="1" value="17"></label><label class="ctl"><span class="ctl-h"><span>Fourth 20%</span><output for="q4"></output></span><input type="range" id="q4" min="1" max="60" step="1" value="23"></label><label class="ctl"><span class="ctl-h"><span>Richest 20%</span><output for="q5"></output></span><input type="range" id="q5" min="1" max="60" step="1" value="39"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"q1": 20, "q2": 20, "q3": 20, "q4": 20, "q5": 20}'>Perfect equality</button><button type="button" data-set='{"q1": 8, "q2": 13, "q3": 17, "q4": 23, "q5": 39}'>Moderate</button><button type="button" data-set='{"q1": 2, "q2": 5, "q3": 10, "q4": 20, "q5": 60}'>Very unequal</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>The <strong>Lorenz curve</strong> plots the cumulative share of income (vertical) earned by the poorest x% of people (horizontal). With perfect equality, the poorest 20% earn 20%, the poorest 40% earn 40%, and so on — the diagonal. Real curves sag below it.</p>
+<p>The <strong>Gini coefficient</strong> turns the curve into one number: the area between the equality line and the Lorenz curve, divided by the whole triangle under the equality line. It runs from 0 (everyone equal) to 1 (one person has everything).</p>
+<p>Two things to keep in mind. First, it matters <em>which</em> income you measure: market income before taxes is much more unequal than <strong>disposable income</strong> after taxes and benefits, so the gap shows how much a country redistributes. Second, very different distributions can have the same Gini — that's why statisticians also report ratios such as <strong>S80/S20</strong> (income of the richest fifth divided by the poorest fifth).</p>
+<p>Eurostat publishes both measures for every EU country each year from the EU-SILC survey, so you can compare Latvia with its neighbours.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Perfect equality</b>, then raise just the richest group. Watch the curve sag and the Gini climb.</li><li>Try raising the <em>middle</em> groups instead of the top. The Gini changes less — it's most sensitive to the middle of the distribution.</li><li>Look for two different settings with the same Gini but a different S80/S20 ratio.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Reading the Gini as the share of income held by the rich. It's an area ratio, not a share.</li><li>Comparing a country's market-income Gini with another's disposable-income Gini.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Gini = A / (A + B)</p><p class="fnote">A: gap between equality line and Lorenz curve; B: area under Lorenz curve</p><p class="formula">With 5 groups: Gini = 1 − Σ 0.2 × (Lₖ + Lₖ₋₁)</p><p class="fnote">L = cumulative income share (as a fraction)</p><p class="formula">S80/S20 = top 20% income ÷ bottom 20%</p><p class="fnote">Income quintile share ratio</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Inequality</dt><dd lang="lv">Nevienlīdzība</dd><dt>Lorenz curve</dt><dd lang="lv">Lorenca līkne</dd><dt>Gini coefficient</dt><dd lang="lv">Džini koeficients</dd><dt>Quintile</dt><dd lang="lv">Kvintile</dd><dt>Disposable income</dt><dd lang="lv">Rīcībā esošie ienākumi</dd><dt>Redistribution</dt><dd lang="lv">Pārdale</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Poverty and Economic Inequality”</span></li><li><a href="https://www.core-econ.org/" target="_blank" rel="noopener">CORE Econ — The Economy</a><span>Chapters on inequality, with real data</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="comparative-advantage.html"><span>← Previous</span><b>Comparative advantage and trade</b></a><a class="next" href="multiplier.html"><span>Next →</span><b>The Keynesian cross and the multiplier</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 100], y: [0, 100], h: 420, xLabel: "% of people (poorest first)", yLabel: "% of total income", title: "Lorenz curve" });
+const b = EP.plot("fig2", { x: [0, 5], y: [0, 70], h: 200, m: { l: 58, r: 24, t: 12, b: 40 }, xLabel: "Income group", yLabel: "Share %", title: "Income share by group" });
+EP.controls(["q1", "q2", "q3", "q4", "q5"], v => {
+  const raw = [v.q1, v.q2, v.q3, v.q4, v.q5].sort((a, b) => a - b), tot = raw.reduce((a, b) => a + b, 0);
+  const sh = raw.map(x => x / tot * 100); const cum = [0]; sh.forEach(s => cum.push(cum[cum.length - 1] + s));
+  const pts = cum.map((c, i) => [i * 20, c]);
+  let g = 0; for (let i = 1; i <= 5; i++) g += 0.2 * (cum[i] + cum[i - 1]) / 100; const gini = 1 - g;
+  p.begin().axes({ fx: x => x + "%", fy: y => y + "%" });
+  p.area([[0, 0], [100, 100]].concat(pts.slice().reverse()), "a1");
+  p.seg(0, 0, 100, 100, "c4 thin").line(pts, "c1");
+  pts.forEach((q, i) => { if (i && i < 5) p.dot(q[0], q[1], "", 4).text(q[0], q[1], EP.fmt(q[1], 0) + "%", "sm", "start", 7, 14); });
+  p.text(56, 60, "equality", "l4", "start", 0, -10);
+  p.end();
+  b.begin().axes({ stepX: 1, fx: x => x ? ["", "Q1", "Q2", "Q3", "Q4", "Q5"][x] || "" : "" });
+  sh.forEach((s, i) => b.rect(i + 0.15, 0, i + 0.85, s, i === 4 ? "a2" : "a1").text(i + 0.5, s, EP.fmt(s, 0) + "%", "sm", "middle", 0, -5));
+  b.end();
+  const ratio = sh[4] / sh[0];
+  EP.readout([["Gini coefficient", EP.fmt(gini, 2)], ["Poorest 20% get", EP.fmt(sh[0], 1) + "%"], ["Richest 20% get", EP.fmt(sh[4], 1) + "%"], ["Richest ÷ poorest (S80/S20)", EP.fmt(ratio, 1) + "×"]],
+    gini < 0.01 ? "Everyone has the same income: the Lorenz curve sits on the equality line and the Gini coefficient is 0."
+    : `The Gini coefficient is <b>${EP.fmt(gini, 2)}</b>: the shaded gap is ${EP.fmt(gini * 100, 0)}% of the whole triangle under the equality line. ${gini < 0.25 ? "That's very equal by international standards." : gini < 0.35 ? "That's in the range typical for European countries' disposable income." : gini < 0.45 ? "That's high for Europe, closer to the United States." : "That's very unequal — like some Latin American or southern African countries."}`);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compound interest, inflation and real value · Econ Playground</title>
+<meta name="description" content="Grow savings over time and see how inflation quietly eats into them — nominal versus real.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Macroeconomics · Topic 12 of 12</div>
+<h1>Compound interest, inflation and real value</h1>
+<p class="lede">A savings account at 3% sounds safe, but if prices rise 4% a year you get poorer every year. This page shows the difference between how much money you have and what it can buy.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Nominal value (euros in the account)</span><span class="key"><i class="" style="background:var(--k3)"></i>Real value (in today&#x27;s money)</span><span class="key"><i class="" style="background:var(--k2)"></i>Cash, real value</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Starting amount (€)</span><output for="amt" data-fmt="int"></output></span><input type="range" id="amt" min="100" max="10000" step="100" value="1000"></label><label class="ctl"><span class="ctl-h"><span>Interest / return per year</span><output for="i" data-fmt="pct"></output></span><input type="range" id="i" min="0" max="15" step="0.5" value="5"></label><label class="ctl"><span class="ctl-h"><span>Inflation per year</span><output for="pi" data-fmt="pct"></output></span><input type="range" id="pi" min="0" max="15" step="0.5" value="3"></label><label class="ctl"><span class="ctl-h"><span>Years</span><output for="yrs"></output></span><input type="range" id="yrs" min="1" max="50" step="1" value="20"></label><label class="ctl check"><input type="checkbox" id="cash" checked>Show cash kept under the mattress</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"i": 2, "pi": 3}'>Savings account</button><button type="button" data-set='{"i": 7, "pi": 2.5}'>Stock index (long-run avg)</button><button type="button" data-set='{"i": 3, "pi": 15}'>High inflation year</button><button type="button" data-set='{"amt": 1000, "i": 5, "pi": 3, "yrs": 20}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p><strong>Compound interest</strong> means you earn interest on your interest. After t years, an amount grows to A × (1 + i)ᵗ. Small differences in the rate turn into big differences over decades, which is why starting to save early matters so much.</p>
+<p><strong>Inflation</strong> works the same way in reverse: if prices rise by π per year, €1 in t years buys what €1 / (1 + π)ᵗ buys today. The <strong>nominal</strong> value is the number of euros in your account; the <strong>real</strong> value is what those euros can actually buy.</p>
+<p>The <strong>real interest rate</strong> is the gap between the two. The exact version is (1 + i) / (1 + π) − 1; the <strong>Fisher shortcut</strong> r ≈ i − π works well when rates are low. When inflation is above the interest rate, the real rate is negative and savers lose purchasing power — this happened to most euro savings accounts in 2022–2023, when inflation in the Baltics was among the highest in the euro area.</p>
+<p>A handy rule: money doubles in about <strong>70 ÷ (rate in %)</strong> years. At 7% that's about 10 years; at 2% it's 35.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Savings account</b>: the blue line rises, but the green real line falls below your starting amount.</li><li>Set inflation to 0. The nominal and real lines become the same — inflation is the only thing separating them.</li><li>Compare 5% and 7% returns over 40 years. The gap is far bigger than 2% sounds.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Adding interest rates instead of compounding them: 10 years at 5% is +63%, not +50%.</li><li>Judging an investment by its nominal return without subtracting inflation.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">FV = PV × (1 + i)ᵗ</p><p class="fnote">Compound growth</p><p class="formula">Real value = FV / (1 + π)ᵗ</p><p class="fnote">Adjust for inflation</p><p class="formula">r = (1 + i) / (1 + π) − 1 ≈ i − π</p><p class="fnote">Real interest rate (Fisher equation)</p><p class="formula">Doubling time ≈ 70 / rate%</p><p class="fnote">Rule of 70</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Compound interest</dt><dd lang="lv">Saliktie procenti</dd><dt>Inflation</dt><dd lang="lv">Inflācija</dd><dt>Nominal</dt><dd lang="lv">Nominālais</dd><dt>Real interest rate</dt><dd lang="lv">Reālā procentu likme</dd><dt>Purchasing power</dt><dd lang="lv">Pirktspēja</dd><dt>Fisher equation</dt><dd lang="lv">Fišera vienādojums</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Inflation” and the section on real vs nominal</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/macroeconomics" target="_blank" rel="noopener">Khan Academy — Macroeconomics</a><span>Units on inflation and the financial sector</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="is-lm.html"><span>← Previous</span><b>IS–LM: fiscal and monetary policy</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 20], y: [0, 3000], xLabel: "Years", yLabel: "€", title: "Savings over time" });
+EP.controls(["amt", "i", "pi", "yrs", "cash"], v => {
+  const { amt, yrs } = v, i = v.i / 100, pi = v.pi / 100;
+  const nom = t => amt * Math.pow(1 + i, t), real = t => nom(t) / Math.pow(1 + pi, t), cash = t => amt / Math.pow(1 + pi, t);
+  const top = Math.max(nom(yrs), amt) * 1.12;
+  p.setDomain([0, yrs], [0, EP.niceStep(top, 1) * Math.ceil(top / EP.niceStep(top, 1))]).begin().axes({ fy: y => y >= 1000 ? EP.fmt(y / 1000, y % 1000 ? 1 : 0) + "k" : EP.fmt(y, 0) });
+  p.seg(0, amt, yrs, amt, "guide");
+  if (v.cash) p.fn(cash, "c2 thin", 0, yrs);
+  p.fn(nom, "c1", 0, yrs).fn(real, "c3", 0, yrs);
+  p.dot(yrs, nom(yrs)).text(yrs, nom(yrs), "€" + EP.fmt(nom(yrs), 0), "l1", "end", -8, -8);
+  p.dot(yrs, real(yrs)).text(yrs, real(yrs), "€" + EP.fmt(real(yrs), 0), "l3", "end", -8, real(yrs) > nom(yrs) * 0.9 ? 18 : -8);
+  if (v.cash) p.text(yrs, cash(yrs), "€" + EP.fmt(cash(yrs), 0), "l2", "end", -8, 16);
+  p.end();
+  const rr = (1 + i) / (1 + pi) - 1;
+  const dbl = x => x > 0 ? EP.fmt(Math.log(2) / Math.log(1 + x), 1) + " years" : "never";
+  EP.readout([["After " + yrs + " years (nominal)", EP.money(nom(yrs), 0)], ["In today's money (real)", EP.money(real(yrs), 0), real(yrs) >= amt ? "good" : "bad"], ["Real interest rate (exact)", EP.fmt(rr * 100, 2) + "%", rr >= 0 ? "good" : "bad"], ["Fisher shortcut  i − π", EP.fmt((i - pi) * 100, 1) + "%"], ["Money doubles in", dbl(i)], ["Purchasing power doubles in", dbl(rr)], ["Cash loses", EP.fmt((1 - cash(yrs) / amt) * 100, 0) + "% of its value"]],
+    rr < 0 ? `The account grows on paper, but prices grow faster: after ${yrs} years your €${EP.fmt(nom(yrs), 0)} buys only what €${EP.fmt(real(yrs), 0)} buys today. A negative real rate means saving here makes you <b>poorer</b> in real terms.`
+    : `Your money grows by ${EP.fmt(v.i, 1)}% a year, but ${EP.fmt(v.pi, 1)}% of that just keeps up with prices. The real gain is about <b>${EP.fmt(rr * 100, 2)}%</b> a year — and compounding turns that into ${EP.fmt((real(yrs) / amt - 1) * 100, 0)}% more purchasing power over ${yrs} years.`);
+});
+</script>
+</body>
+</html>

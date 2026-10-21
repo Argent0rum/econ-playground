@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Costs and perfect competition · Econ Playground</title>
+<meta name="description" content="Set the market price and watch a firm choose output, make profits or losses, and decide when to shut down.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 5 of 12</div>
+<h1>Costs and perfect competition</h1>
+<p class="lede">In a perfectly competitive market a firm can&#x27;t choose its price — it takes the market price and only decides how much to produce. Its cost curves tell it the answer.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k2)"></i>Marginal cost (MC)</span><span class="key"><i class="" style="background:var(--k1)"></i>Average total cost (ATC)</span><span class="key"><i class="" style="background:var(--k4)"></i>Average variable cost (AVC)</span><span class="key"><i class="" style="background:var(--k3)"></i>Price = MR</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Market price (€)</span><output for="price"></output></span><input type="range" id="price" min="4" max="30" step="0.5" value="14"></label><label class="ctl"><span class="ctl-h"><span>Fixed costs (€)</span><output for="fc"></output></span><input type="range" id="fc" min="0" max="60" step="1" value="20"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"price": 22}'>Big profits</button><button type="button" data-set='{"price": 11}'>Break-even</button><button type="button" data-set='{"price": 8}'>Loss but stay open</button><button type="button" data-set='{"price": 5.5}'>Shut down</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A firm in perfect competition is a <strong>price taker</strong>: there are so many sellers of an identical product that it can sell as much as it wants at the market price, and nothing at a higher price. So for this firm, price equals <strong>marginal revenue</strong>.</p>
+<p>It maximises profit by producing where <strong>price = marginal cost</strong>. Below that quantity, one more unit adds more revenue than cost; above it, the extra unit costs more than it brings in.</p>
+<p>Whether that output makes a profit depends on <strong>average total cost</strong> (ATC) at that quantity: profit = (P − ATC) × Q. If the price is between minimum average variable cost and minimum ATC, the firm loses money but still produces in the short run, because shutting down would mean losing all its fixed costs. Below minimum AVC (the <strong>shutdown point</strong>), it's better to stop.</p>
+<p>In the <strong>long run</strong>, profits attract new firms and losses drive firms out, until price settles at minimum ATC — firms make zero economic profit, which still includes a normal return on the owner's money and time.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Big profits</b>, then slowly lower the price. The green rectangle shrinks to nothing at the break-even point, then turns red.</li><li>Find a price between €6.40 and the break-even price. The firm loses money but still produces — check that the loss is smaller than its fixed costs.</li><li>Raise fixed costs. The ATC curve moves up, but the output choice doesn't change at all — fixed costs don't affect marginal decisions.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Producing where profit per unit (P − ATC) is largest. The goal is the largest <em>total</em> profit, which is where P = MC.</li><li>Thinking a firm making a loss should always close. In the short run it compares price with average <em>variable</em> cost.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Profit-max rule: MR = MC</p><p class="fnote">For a price taker: P = MC</p><p class="formula">Profit = (P − ATC) × Q</p><p class="fnote">Total profit</p><p class="formula">Shutdown if P &lt; min AVC</p><p class="fnote">Short-run decision</p><p class="formula">MC curve cuts AVC and ATC at their minimums</p><p class="fnote">Why the curves cross where they do</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Fixed costs</dt><dd lang="lv">Pastāvīgās izmaksas</dd><dt>Variable costs</dt><dd lang="lv">Mainīgās izmaksas</dd><dt>Marginal cost</dt><dd lang="lv">Robežizmaksas</dd><dt>Average total cost</dt><dd lang="lv">Vidējās kopējās izmaksas</dd><dt>Perfect competition</dt><dd lang="lv">Pilnīgā konkurence</dd><dt>Break-even point</dt><dd lang="lv">Bezzaudējuma punkts</dd><dt>Shutdown point</dt><dd lang="lv">Ražošanas pārtraukšanas punkts</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapters “Production, Costs and Industry Structure” and “Perfect Competition”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Units on production, cost and perfect competition</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="ppf.html"><span>← Previous</span><b>Production possibilities and opportunity cost</b></a><a class="next" href="monopoly.html"><span>Next →</span><b>Monopoly vs competition</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 14], y: [0, 36], xLabel: "Output (Q)", yLabel: "€ per unit", title: "Firm cost curves" });
+const MC = q => 10 - 2.4 * q + 0.3 * q * q, AVC = q => 10 - 1.2 * q + 0.1 * q * q;
+EP.controls(["price", "fc"], v => {
+  const P = v.price, F = v.fc, ATC = q => AVC(q) + F / q;
+  let be = Infinity, beq = 0; for (let q = 0.5; q <= 14; q += 0.01) { const c = ATC(q); if (c < be) { be = c; beq = q; } }
+  const disc = 5.76 - 1.2 * (10 - P);
+  let Q = disc >= 0 ? (2.4 + Math.sqrt(disc)) / 0.6 : 0; const shut = P < 6.4; if (shut) Q = 0;
+  const profit = Q ? (P - ATC(Q)) * Q : -F;
+  p.begin().axes();
+  if (Q) p.rect(0, ATC(Q), Q, P, profit >= 0 ? "agood" : "abad");
+  p.fn(MC, "c2", 0.3, 14).fn(AVC, "c4", 0.3, 14).fn(ATC, "c1", 0.3, 14);
+  p.seg(0, P, 14, P, "c3").text(13.8, P, "P = MR", "l3", "end", 0, -7);
+  p.text(13.2, MC(13.2), "MC", "l2", "end", -8, 0).text(13.6, ATC(13.6), "ATC", "l1", "end", 0, 16).text(13.6, AVC(13.6), "AVC", "l4", "end", 0, 16);
+  p.dot(6, 6.4, "hollow", 4).text(6, 6.4, "shutdown", "sm", "middle", 0, 18);
+  p.dot(beq, be, "hollow", 4).text(beq, be, "break-even", "sm", "start", 8, -8);
+  if (Q) { p.guide(Q, P, EP.fmt(Q), null).dot(Q, P); p.seg(Q, ATC(Q), 0, ATC(Q), "guide"); }
+  p.end();
+  const rows = [["Output chosen (P = MC)", shut ? "0 (shut down)" : EP.fmt(Q)], ["Average total cost", Q ? EP.money(ATC(Q)) : "—"], [profit >= 0 ? "Profit" : "Loss", EP.money(profit, 0), profit >= 0 ? "good" : "bad"], ["Shutdown price (min AVC)", EP.money(6.4)], ["Break-even price (min ATC)", EP.money(be)]];
+  let note;
+  if (shut) note = `The price is below the lowest average variable cost (€6.40), so every unit produced loses money even before fixed costs. The firm <b>shuts down</b> and only loses its fixed costs (€${EP.fmt(F, 0)}).`;
+  else if (profit >= 0.5) note = `The firm produces where price equals marginal cost and earns a <b>profit</b> (green). In the long run these profits attract new firms, which pushes the market price down toward the break-even level.`;
+  else if (profit > -0.5) note = `Price is about equal to minimum ATC: the firm covers all its costs, including a normal return. This is the long-run outcome in perfect competition.`;
+  else note = `The firm makes a <b>loss</b> (red) but keeps producing: price still covers its variable costs and helps pay part of the fixed costs it has to pay anyway. In the long run some firms leave, and the price recovers.`;
+  EP.readout(rows, note);
+});
+</script>
+</body>
+</html>

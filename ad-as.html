@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aggregate demand and aggregate supply · Econ Playground</title>
+<meta name="description" content="Hit the economy with booms, recessions and oil shocks, and see output gaps and inflation appear.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Macroeconomics · Topic 10 of 12</div>
+<h1>Aggregate demand and aggregate supply</h1>
+<p class="lede">The AD–AS model is the macro version of supply and demand: total spending in the economy against total production, with the price level instead of a single price.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Aggregate demand (AD)</span><span class="key"><i class="" style="background:var(--k2)"></i>Short-run aggregate supply (SRAS)</span><span class="key"><i class="" style="background:var(--k3)"></i>Long-run supply (potential output)</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Aggregate demand shift</span><output for="d"></output></span><input type="range" id="d" min="-50" max="50" step="1" value="0"></label><label class="ctl"><span class="ctl-h"><span>Short-run supply shift (costs)</span><output for="s"></output></span><input type="range" id="s" min="-40" max="50" step="1" value="0"></label><label class="ctl"><span class="ctl-h"><span>Potential output</span><output for="yp"></output></span><input type="range" id="yp" min="80" max="120" step="1" value="100"></label><label class="ctl check"><input type="checkbox" id="lr">Show how the economy adjusts in the long run</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"d": 30, "s": 0, "yp": 100}'>Demand boom</button><button type="button" data-set='{"d": -30, "s": 0, "yp": 100}'>Recession</button><button type="button" data-set='{"d": 0, "s": 30, "yp": 100}'>Energy price shock</button><button type="button" data-set='{"d": 0, "s": -20, "yp": 112}'>Productivity gain</button><button type="button" data-set='{"d": 0, "s": 0, "yp": 100, "lr": false}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p><strong>Aggregate demand (AD)</strong> is total spending on a country's output — consumption, investment, government purchases and net exports — at each price level. It slopes down mainly because a higher price level reduces real wealth and makes exports less competitive.</p>
+<p><strong>Short-run aggregate supply (SRAS)</strong> slopes up because some costs, especially wages, are fixed in contracts for a while: when prices rise, firms' margins widen and they produce more. <strong>Long-run aggregate supply</strong> is vertical at <strong>potential output</strong> — what the economy produces when its labour and capital are used at normal rates.</p>
+<p>A <strong>demand shock</strong> moves AD: output and prices move in the same direction. A <strong>supply shock</strong> moves SRAS: an energy price spike raises prices <em>and</em> cuts output (stagflation), as Europe saw in 2022.</p>
+<p>The gap between actual and potential output is the <strong>output gap</strong>. A positive gap creates inflation pressure; a negative gap means unemployment. In the long run wages adjust and the economy drifts back to potential, but “the long run” can take years — which is the case for active fiscal and monetary policy.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Energy price shock</b>: prices rise while output falls. Compare it with <b>Recession</b>, where prices fall.</li><li>After the demand boom, tick the long-run box: output returns to potential, but the price level stays higher.</li><li>Click <b>Productivity gain</b>. Potential output grows and prices fall — the good kind of supply shock.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Treating AD like a single market's demand curve. It slopes down for different reasons (wealth, interest rates, exchange rates), not substitution between goods.</li><li>Forgetting that a supply shock moves output and prices in <em>opposite</em> directions.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">AD = C + I + G + (X − M)</p><p class="fnote">Components of demand</p><p class="formula">Output gap = (Y − Y*) / Y* × 100%</p><p class="fnote">Y* = potential output</p><p class="formula">Here: AD: P = 200 − Y; SRAS: P = 50 + 0.5Y</p><p class="fnote">The curves used</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Aggregate demand</dt><dd lang="lv">Kopējais pieprasījums</dd><dt>Aggregate supply</dt><dd lang="lv">Kopējais piedāvājums</dd><dt>Potential output</dt><dd lang="lv">Potenciālā izlaide</dd><dt>Output gap</dt><dd lang="lv">Izlaides plaisa</dd><dt>Price level</dt><dd lang="lv">Cenu līmenis</dd><dt>Stagflation</dt><dd lang="lv">Stagflācija</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “The Aggregate Demand/Aggregate Supply Model”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/macroeconomics" target="_blank" rel="noopener">Khan Academy — Macroeconomics</a><span>Unit on national income and price determination</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="multiplier.html"><span>← Previous</span><b>The Keynesian cross and the multiplier</b></a><a class="next" href="is-lm.html"><span>Next →</span><b>IS–LM: fiscal and monetary policy</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [40, 160], y: [20, 200], xLabel: "Real output Y (index)", yLabel: "Price level", title: "AD–AS diagram" });
+EP.controls(["d", "s", "yp", "lr"], v => {
+  const { d, s, yp } = v;
+  const AD = (y, dd) => 200 - y + dd, AS = (y, ss) => 50 + 0.5 * y + ss;
+  const Y = (150 + d - s) / 1.5, P = AD(Y, d), gap = (Y - yp) / yp * 100;
+  p.begin().axes();
+  if (d) p.fn(y => AD(y, 0), "cg"); if (s) p.fn(y => AS(y, 0), "cg");
+  p.seg(yp, 20, yp, 200, "c3").text(yp, 196, "LRAS", "l3", "start", 6, 8);
+  p.fn(y => AD(y, d), "c1").fn(y => AS(y, s), "c2");
+  const ya = Math.min(150, 200 + d - 30), ys = Math.min(150, (190 - 50 - s) / 0.5);
+  p.text(ya, AD(ya, d), "AD", "l1", "start", 6, -4).text(ys, AS(ys, s), "SRAS", "l2", "end", -6, -8);
+  let lrP = null;
+  if (v.lr && Math.abs(Y - yp) > 0.3) {
+    const s2 = 150 + d - 1.5 * yp; lrP = AD(yp, d);
+    p.fn(y => AS(y, s2), "c2 dash thin").dot(yp, lrP, "hollow", 5).text(yp, lrP, "long run", "sm", "start", 8, -8);
+  }
+  p.guide(Y, P, EP.fmt(Y, 0), EP.fmt(P, 0)).dot(Y, P);
+  p.end();
+  const state = Math.abs(gap) < 0.5 ? "at potential" : gap > 0 ? "inflationary gap" : "recessionary gap";
+  let note;
+  if (Math.abs(gap) < 0.5) note = d || s ? "Output is back at potential, so there's no gap. The price level is " + (P > 100.5 ? "higher" : P < 99.5 ? "lower" : "about the same") + " than at the start." : "The economy is producing exactly its potential output: workers and machines are fully but not over-used, so there's no pressure on prices to speed up or slow down.";
+  else if (gap > 0) note = `Output is <b>${EP.fmt(gap, 1)}% above</b> potential. Firms are stretched and unemployment is unusually low, so wages and prices rise faster. In the long run rising costs push SRAS up until output returns to potential — at a higher price level. Tick the long-run box to see it.`;
+  else note = `Output is <b>${EP.fmt(-gap, 1)}% below</b> potential: a recession, with unemployment above normal. ${s > 0 && d === 0 ? "Because this came from a cost shock, prices went <em>up</em> while output fell — that's stagflation, the hardest case for policymakers." : "Over time lower wage pressure would push SRAS down, but that can be slow and painful — which is why governments and central banks often try to push AD back up instead."}`;
+  EP.readout([["Real output", EP.fmt(Y, 1)], ["Price level", EP.fmt(P, 1)], ["Potential output", EP.fmt(yp, 0)], ["Output gap", (gap >= 0 ? "+" : "−") + EP.fmt(Math.abs(gap), 1) + "%", Math.abs(gap) < 0.5 ? "" : gap > 0 ? "" : "bad"], ["Situation", state]].concat(lrP ? [["Long-run price level", EP.fmt(lrP, 1)]] : []), note);
+});
+</script>
+</body>
+</html>

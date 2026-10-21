@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparative advantage and trade · Econ Playground</title>
+<meta name="description" content="Two countries, two goods. Specialise by opportunity cost, trade, and both end up beyond their own frontiers.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 7 of 12</div>
+<h1>Comparative advantage and trade</h1>
+<p class="lede">Even a country that&#x27;s better at making everything gains from trade. What matters isn&#x27;t who&#x27;s best, but who gives up less to make each good.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Country A frontier</span><span class="key"><i class="" style="background:var(--k2)"></i>Country B frontier</span><span class="key"><i style="background:var(--ink);height:8px;width:8px;border-radius:50%"></i>with trade</span><span class="key"><i style="background:var(--surface);border:2px solid var(--ink);height:9px;width:9px;border-radius:50%"></i>before trade</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><h3 style="margin:2px 0 4px">Country A can make…</h3><label class="ctl"><span class="ctl-h"><span>Cheese (if it makes only cheese)</span><output for="aC"></output></span><input type="range" id="aC" min="10" max="100" step="1" value="60"></label><label class="ctl"><span class="ctl-h"><span>Software (if only software)</span><output for="aS"></output></span><input type="range" id="aS" min="10" max="100" step="1" value="30"></label><h3 style="margin:10px 0 4px">Country B can make…</h3><label class="ctl"><span class="ctl-h"><span>Cheese (if only cheese)</span><output for="bC"></output></span><input type="range" id="bC" min="10" max="100" step="1" value="40"></label><label class="ctl"><span class="ctl-h"><span>Software (if only software)</span><output for="bS"></output></span><input type="range" id="bS" min="10" max="100" step="1" value="80"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"aC": 60, "aS": 30, "bC": 40, "bS": 80}'>Classic example</button><button type="button" data-set='{"aC": 40, "aS": 20, "bC": 80, "bS": 90}'>B better at both</button><button type="button" data-set='{"aC": 60, "aS": 30, "bC": 40, "bS": 20}'>Same costs</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A country has an <strong>absolute advantage</strong> if it can make more of a good with the same resources. It has a <strong>comparative advantage</strong> if it can make that good at a lower <strong>opportunity cost</strong> — giving up less of other things.</p>
+<p>David Ricardo's insight (1817) was that comparative advantage, not absolute advantage, drives the gains from trade. Even if one country is better at everything, the two countries' opportunity costs almost always differ. Each should specialise in the good it gives up least to make, then trade.</p>
+<p>The trade price has to lie <strong>between</strong> the two countries' opportunity costs. If cheese costs A 0.5 software and B 2 software, any price between 0.5 and 2 software per cheese makes both sides better off. Here the graph uses a price in between and shows each country's consumption before (hollow) and after trade (filled). After trade, both end up beyond what they could make alone.</p>
+<p>The model leaves out a lot — transport costs, workers who lose their jobs in shrinking industries, changing productivity — which is why trade policy is still debated. But the core logic explains why small open economies like the Baltic states trade so much.</p>
+    <h2>Try this</h2>
+    <ol><li>Start with the <b>classic example</b> and check the readout: who has the lower cost of cheese? That country should specialise in it.</li><li>Click <b>B better at both</b>. B has an absolute advantage in both goods, yet both countries still gain.</li><li>Click <b>Same costs</b>. The frontiers are parallel and the gains disappear.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Deciding specialisation by who produces more (absolute advantage) instead of who gives up less (comparative advantage).</li><li>Forgetting that the opportunity cost of one good is the inverse of the other: if 1 cheese costs 0.5 software, 1 software costs 2 cheese.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">OC of cheese = software max / cheese max</p><p class="fnote">For a straight-line frontier</p><p class="formula">Specialise where your OC is lower</p><p class="fnote">Comparative advantage rule</p><p class="formula">OC_A &lt; trade price &lt; OC_B</p><p class="fnote">Both gain only within this range</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Comparative advantage</dt><dd lang="lv">Salīdzinošās priekšrocības</dd><dt>Absolute advantage</dt><dd lang="lv">Absolūtās priekšrocības</dd><dt>Specialisation</dt><dd lang="lv">Specializācija</dd><dt>Terms of trade</dt><dd lang="lv">Tirdzniecības nosacījumi</dd><dt>Gains from trade</dt><dd lang="lv">Ieguvumi no tirdzniecības</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “International Trade”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Unit on comparative advantage and gains from trade</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="monopoly.html"><span>← Previous</span><b>Monopoly vs competition</b></a><a class="next" href="inequality.html"><span>Next →</span><b>Inequality: the Lorenz curve and Gini coefficient</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 105], y: [0, 105], xLabel: "Cheese", yLabel: "Software", title: "Two countries' production frontiers" });
+EP.controls(["aC", "aS", "bC", "bS"], v => {
+  const { aC, aS, bC, bS } = v;
+  const ocA = aS / aC, ocB = bS / bC; // software given up per cheese
+  p.begin().axes();
+  p.seg(0, aS, aC, 0, "c1").seg(0, bS, bC, 0, "c2");
+  p.text(aC, 0, "A", "l1", "end", -4, -8).text(bC, 0, "B", "l2", "end", -4, -8);
+  const autA = [aC / 2, aS / 2], autB = [bC / 2, bS / 2];
+  let rows, note, cA = autA, cB = autB;
+  if (Math.abs(ocA - ocB) < 1e-6) {
+    note = "Both countries give up exactly the same amount of software for each cheese, so neither has a comparative advantage. There are <b>no gains from trade</b> — specialising wouldn't produce anything extra.";
+    rows = [["A: 1 cheese costs", EP.fmt(ocA, 2) + " software"], ["B: 1 cheese costs", EP.fmt(ocB, 2) + " software"], ["Gains from trade", "none"]];
+  } else {
+    const t = Math.sqrt(ocA * ocB); // terms of trade between the two costs
+    const aCheese = ocA < ocB; // A exports cheese?
+    if (aCheese) {
+      const E = Math.min(aC / 2, bS / (2 * t)); cA = [aC - E, t * E]; cB = [E, bS - t * E];
+      p.fn(x => t * (aC - x), "c1 dash thin", 0, aC).fn(x => bS - t * x, "c2 dash thin", 0, bS / t);
+    } else {
+      const E = Math.min(bC / 2, aS / (2 * t)); cB = [bC - E, t * E]; cA = [E, aS - t * E];
+      p.fn(x => t * (bC - x), "c2 dash thin", 0, bC).fn(x => aS - t * x, "c1 dash thin", 0, aS / t);
+    }
+    const gainA = cA[1] - aS * (1 - cA[0] / aC), gainB = cB[1] - bS * (1 - cB[0] / bC);
+    rows = [["A: 1 cheese costs", EP.fmt(ocA, 2) + " software"], ["B: 1 cheese costs", EP.fmt(ocB, 2) + " software"], ["A specialises in", aCheese ? "cheese" : "software"], ["B specialises in", aCheese ? "software" : "cheese"], ["Trade price (1 cheese =)", EP.fmt(t, 2) + " software"], ["A's extra software", "+" + EP.fmt(gainA), "good"], ["B's extra software", "+" + EP.fmt(gainB), "good"]];
+    const absBoth = (bC >= aC && bS >= aS) || (aC >= bC && aS >= bS);
+    note = `${aCheese ? "A" : "B"} gives up less software per cheese, so it has the comparative advantage in cheese; the other country has it in software. After specialising and trading at ${EP.fmt(t, 2)} software per cheese, both countries consume combinations <b>outside their own frontiers</b> (filled dots).${absBoth ? " Notice one country is better at <em>both</em> goods (absolute advantage) — trade still helps both." : ""}`;
+  }
+  p.dot(autA[0], autA[1], "hollow", 5).dot(autB[0], autB[1], "hollow", 5);
+  if (cA !== autA) { p.seg(autA[0], autA[1], cA[0], cA[1], "guide").seg(autB[0], autB[1], cB[0], cB[1], "guide"); }
+  p.dot(cA[0], cA[1]).text(cA[0], cA[1], "A", "l1", "start", 8, -6).dot(cB[0], cB[1]).text(cB[0], cB[1], "B", "l2", "start", 8, -6);
+  p.end();
+  EP.readout(rows, note);
+});
+</script>
+</body>
+</html>

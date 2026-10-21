@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Keynesian cross and the multiplier · Econ Playground</title>
+<meta name="description" content="Change government spending or the propensity to consume and watch one euro of spending turn into several euros of output.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Macroeconomics · Topic 9 of 12</div>
+<h1>The Keynesian cross and the multiplier</h1>
+<p class="lede">When the government spends a euro, someone earns it — and spends part of that, which someone else earns and spends again. The multiplier adds up all those rounds.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><svg id="fig2"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Aggregate expenditure (AE)</span><span class="key"><i class="" style="background:var(--k4)"></i>45° line: spending = output</span><span class="key"><i style="background:var(--line-2)"></i>Starting position</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Marginal propensity to consume (MPC)</span><output for="mpc" data-fmt="dec2"></output></span><input type="range" id="mpc" min="0.5" max="0.85" step="0.01" value="0.75"></label><label class="ctl"><span class="ctl-h"><span>Government spending (€bn)</span><output for="G"></output></span><input type="range" id="G" min="40" max="120" step="1" value="80"></label><label class="ctl"><span class="ctl-h"><span>Business investment (€bn)</span><output for="I"></output></span><input type="range" id="I" min="30" max="100" step="1" value="60"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"G": 100, "I": 60}'>Stimulus +€20bn</button><button type="button" data-set='{"G": 80, "I": 40}'>Investment slump</button><button type="button" data-set='{"mpc": 0.6}'>Thrifty households</button><button type="button" data-set='{"mpc": 0.75, "G": 80, "I": 60}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>In the short run, Keynesian economics says output is driven by <strong>aggregate expenditure</strong>: AE = C + I + G (+ net exports, left out here). Consumption depends partly on income: C = C₀ + MPC × Y, where the <strong>marginal propensity to consume</strong> (MPC) is the share of an extra euro of income that people spend.</p>
+<p>Equilibrium is where planned spending equals output, so firms neither pile up unsold stock nor run out: the point where the AE line crosses the <strong>45° line</strong>.</p>
+<p>When spending rises by €1, output rises by more than €1. The first euro becomes someone's income; they spend MPC of it, which becomes someone else's income, and so on. Adding up 1 + MPC + MPC² + … gives the <strong>multiplier</strong> 1 / (1 − MPC). With an MPC of 0.75 that's 4.</p>
+<p>Real-world multipliers are much smaller — often estimated between about 0.5 and 2 — because some of each round leaks into <strong>taxes</strong>, <strong>imports</strong> (very important for a small open economy like Latvia) and savings, and because higher interest rates can crowd out private investment (see IS–LM).</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Stimulus +€20bn</b>. Output rises by four times as much. Then lower the MPC to 0.6 and see the same stimulus do less.</li><li>Watch the bar chart as you move the MPC. A high MPC makes the bars shrink slowly, so the total is large.</li><li>Click <b>Investment slump</b>: the multiplier works in reverse too — that's how a drop in business confidence turns into a recession.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Treating the simple multiplier as the real-world effect of a stimulus. Taxes, imports and interest rates make it much smaller.</li><li>Confusing the MPC (share of <em>extra</em> income spent) with the average share of income spent.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">AE = C + I + G, C = C₀ + MPC × Y</p><p class="fnote">Planned spending</p><p class="formula">Y* = (C₀ + I + G) / (1 − MPC)</p><p class="fnote">Equilibrium output</p><p class="formula">Multiplier = 1 / (1 − MPC) = 1 / MPS</p><p class="fnote">MPS = marginal propensity to save</p><p class="formula">With taxes and imports: 1 / (1 − MPC(1 − t) + MPM)</p><p class="fnote">Open-economy multiplier</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Aggregate expenditure</dt><dd lang="lv">Kopējie izdevumi</dd><dt>Marginal propensity to consume</dt><dd lang="lv">Robežtieksme patērēt</dd><dt>Multiplier</dt><dd lang="lv">Multiplikators</dd><dt>Equilibrium output</dt><dd lang="lv">Līdzsvara izlaide</dd><dt>Autonomous spending</dt><dd lang="lv">Autonomie izdevumi</dd><dt>Fiscal stimulus</dt><dd lang="lv">Fiskālais stimuls</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “The Keynesian Perspective” and its appendix on the expenditure–output model</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/macroeconomics" target="_blank" rel="noopener">Khan Academy — Macroeconomics</a><span>Unit on the Keynesian cross and the multiplier</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="inequality.html"><span>← Previous</span><b>Inequality: the Lorenz curve and Gini coefficient</b></a><a class="next" href="ad-as.html"><span>Next →</span><b>Aggregate demand and aggregate supply</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 1500], y: [0, 1500], h: 400, xLabel: "Output / income Y (€bn)", yLabel: "Spending (€bn)", title: "Keynesian cross" });
+const b = EP.plot("fig2", { x: [0, 12], y: [0, 1], h: 200, m: { l: 58, r: 24, t: 14, b: 40 }, xLabel: "Spending round", yLabel: "€bn", title: "Rounds of the multiplier" });
+const C0 = 40, A0 = C0 + 60 + 80, c0 = 0.75, Y0 = A0 / (1 - c0);
+EP.controls(["mpc", "G", "I"], v => {
+  const c = v.mpc, A = C0 + v.I + v.G, Y = A / (1 - c), k = 1 / (1 - c), dA = A - A0;
+  p.begin().axes();
+  p.seg(0, 0, 1500, 1500, "c4 thin").text(1380, 1380, "45°", "l4", "end", -6, -6);
+  if (A !== A0 || c !== c0) { p.fn(y => A0 + c0 * y, "cg"); p.dot(Y0, Y0, "hollow", 4.5); }
+  p.fn(y => A + c * y, "c1").text(1450, A + c * 1450, "AE = C + I + G", "l1", "end", 0, -10);
+  p.guide(Y, Y, EP.fmt(Y, 0), EP.fmt(Y, 0)).dot(Y, Y);
+  p.end();
+  const inj = Math.abs(dA) > 0.01 ? dA : 10, illustrative = Math.abs(dA) < 0.01;
+  b.setDomain(null, [0, Math.abs(inj) * 1.15]).begin().axes({ stepX: 1, fy: x => EP.fmt(x, Math.abs(inj) < 10 ? 1 : 0) });
+  let sum = 0; for (let r = 0; r < 12; r++) { const amt = Math.abs(inj) * Math.pow(c, r); sum += amt; b.rect(r + 0.12, 0, r + 0.88, amt, r ? "a1" : "a2"); }
+  b.text(11.8, Math.abs(inj) * 1.05, `total after 12 rounds: ${EP.fmt(sum, 1)} of ${EP.fmt(Math.abs(inj) * k, 1)}`, "sm", "end");
+  b.end();
+  const dY = Y - Y0;
+  EP.readout([["Multiplier 1 / (1 − MPC)", EP.fmt(k, 2)], ["Equilibrium output", "€" + EP.fmt(Y, 0) + "bn"], ["Change in autonomous spending", (dA >= 0 ? "+" : "−") + "€" + EP.fmt(Math.abs(dA), 0) + "bn"], ["Change in output", (dY >= 0 ? "+" : "−") + "€" + EP.fmt(Math.abs(dY), 0) + "bn", dY > 0.5 ? "good" : dY < -0.5 ? "bad" : ""]],
+    illustrative ? `With an MPC of ${EP.fmt(c, 2)}, every extra €1 of spending ends up adding <b>€${EP.fmt(k, 2)}</b> of output. The bar chart shows how an illustrative €10bn injection spreads: the orange bar is the first round, each blue bar is the part of the previous round that gets spent again.`
+    : `Autonomous spending changed by €${EP.fmt(Math.abs(dA), 0)}bn and output changed by €${EP.fmt(Math.abs(dY), 0)}bn — ${EP.fmt(k, 2)} times as much. Each round in the lower chart is ${EP.fmt(c * 100, 0)}% of the round before, because that's the share of extra income people spend.`);
+});
+</script>
+</body>
+</html>
