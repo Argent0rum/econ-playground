@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monopoly vs competition · Econ Playground</title>
+<meta name="description" content="Compare a single seller with a competitive market: higher price, lower output, and a deadweight loss.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 6 of 12</div>
+<h1>Monopoly vs competition</h1>
+<p class="lede">A monopolist faces the whole downward-sloping demand curve, so selling one more unit means cutting the price on every unit. That changes its best choice.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Demand</span><span class="key"><i class="" style="background:var(--k4)"></i>Marginal revenue (MR)</span><span class="key"><i class="" style="background:var(--k2)"></i>Marginal cost</span><span class="key"><i class="sq" style="background:var(--k3)"></i>Monopoly profit</span><span class="key"><i class="sq" style="background:var(--k6)"></i>Deadweight loss</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Demand: highest price (€)</span><output for="a"></output></span><input type="range" id="a" min="60" max="120" step="1" value="100"></label><label class="ctl"><span class="ctl-h"><span>Marginal cost (€)</span><output for="c"></output></span><input type="range" id="c" min="5" max="60" step="1" value="20"></label><label class="ctl check"><input type="checkbox" id="comp" checked>Show the competitive outcome</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"c": 8}'>Cheap to produce</button><button type="button" data-set='{"c": 50}'>Expensive to produce</button><button type="button" data-set='{"a": 120}'>Strong demand</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A <strong>monopoly</strong> is a market with a single seller and no close substitutes, protected by barriers to entry: patents, control of a key resource, huge fixed costs, or government licences.</p>
+<p>Unlike a competitive firm, a monopolist can't sell more without lowering its price — on <em>all</em> units. So its <strong>marginal revenue</strong> is below the price, and for a straight-line demand curve the MR line falls twice as steeply. The monopolist produces where <strong>MR = MC</strong>, then reads the price off the demand curve.</p>
+<p>The result: <strong>a higher price and a lower quantity</strong> than a competitive market with the same costs. Some consumer surplus is transferred to the firm as profit — that's a redistribution. But some trades don't happen at all, even though buyers value them above their cost — that's the <strong>deadweight loss</strong>, a real loss to society.</p>
+<p>That's why governments use competition law, regulate natural monopolies such as electricity grids and water networks, and sometimes prefer public ownership. Latvia's Competition Council (Konkurences padome) is the body that enforces this.</p>
+    <h2>Try this</h2>
+    <ol><li>Compare the monopoly dot with the competitive dot. The price gap is the markup; the quantity gap is the lost trades.</li><li>Raise marginal cost to €50. The markup percentage falls — a monopolist can't charge much above cost when costs are already close to what buyers will pay.</li><li>Untick the competitive outcome and ask yourself where the deadweight loss triangle should be, then tick it again to check.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Thinking a monopolist charges the highest possible price. It charges the profit-maximising price, which balances price against quantity.</li><li>Setting price where MR = MC. MR = MC gives the <em>quantity</em>; the price comes from the demand curve above it.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">MR = MC</p><p class="fnote">Profit-maximising quantity</p><p class="formula">Linear demand P = a − Q → MR = a − 2Q</p><p class="fnote">MR falls twice as fast</p><p class="formula">Lerner index = (P − MC) / P</p><p class="fnote">Measure of market power</p><p class="formula">DWL = ½ × (Pm − MC) × (Qc − Qm)</p><p class="fnote">Deadweight loss here</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Monopoly</dt><dd lang="lv">Monopols</dd><dt>Marginal revenue</dt><dd lang="lv">Robežieņēmumi</dd><dt>Market power</dt><dd lang="lv">Tirgus vara</dd><dt>Barriers to entry</dt><dd lang="lv">Ienākšanas barjeras</dd><dt>Natural monopoly</dt><dd lang="lv">Dabiskais monopols</dd><dt>Markup</dt><dd lang="lv">Uzcenojums</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Monopoly”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Unit on imperfect competition</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="costs-competition.html"><span>← Previous</span><b>Costs and perfect competition</b></a><a class="next" href="comparative-advantage.html"><span>Next →</span><b>Comparative advantage and trade</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 120], y: [0, 125], xLabel: "Quantity (Q)", yLabel: "Price (€)", title: "Monopoly diagram" });
+const cEl = document.getElementById("c");
+EP.controls(["a", "c", "comp"], v => {
+  const a = v.a; let c = Math.min(v.c, a - 6); if (c !== v.c) { cEl.value = c; document.querySelector('output[for="c"]').textContent = c; }
+  const Qm = (a - c) / 2, Pm = (a + c) / 2, Qc = a - c;
+  p.begin().axes();
+  p.area([[0, a], [Qm, Pm], [0, Pm]], "a1").rect(0, c, Qm, Pm, "a3");
+  if (v.comp) p.area([[Qm, Pm], [Qc, c], [Qm, c]], "a6");
+  p.seg(0, a, a, 0, "c1").seg(0, a, a / 2, 0, "c4").seg(0, c, 120, c, "c2");
+  p.text(Math.min(a - 8, 112), 8, "D", "l1", "end", 0, -6).text(a / 2 - 2, 6, "MR", "l4", "end", 0, -6).text(118, c, "MC", "l2", "end", 0, -7);
+  p.dot(Qm, c, "hollow", 4).text(Qm, c, "MR = MC", "sm", "start", 8, 16);
+  p.guide(Qm, Pm, EP.fmt(Qm), "€" + EP.fmt(Pm)).dot(Qm, Pm).text(Qm, Pm, "monopoly", "", "start", 9, -8);
+  if (v.comp) p.dot(Qc, c).text(Qc, c, "competitive", "sm", "start", 8, -8);
+  p.end();
+  const profit = (Pm - c) * Qm, dwl = 0.5 * (Pm - c) * (Qc - Qm);
+  EP.readout([["Monopoly price", EP.money(Pm)], ["Monopoly quantity", EP.fmt(Qm)], ["Monopoly profit", EP.money(profit, 0), "good"], ["Competitive price / quantity", EP.money(c) + " / " + EP.fmt(Qc)], ["Deadweight loss", EP.money(dwl, 0), "bad"], ["Markup (Lerner index)", EP.fmt((Pm - c) / Pm * 100, 0) + "%"]],
+    `The monopolist stops at <b>${EP.fmt(Qm)}</b> units, where marginal revenue equals marginal cost, and charges €${EP.fmt(Pm)} — what buyers will pay for that quantity. A competitive market would sell <b>${EP.fmt(Qc)}</b> units at cost. Part of the old consumer surplus becomes monopoly profit (green), and the yellow triangle is lost entirely.`);
+});
+</script>
+</body>
+</html>

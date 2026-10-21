@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taxes, who pays, and deadweight loss · Econ Playground</title>
+<meta name="description" content="Put a tax on a market and see how the burden splits between buyers and sellers.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 3 of 12</div>
+<h1>Taxes, who pays, and deadweight loss</h1>
+<p class="lede">A tax drives a wedge between what buyers pay and what sellers keep. Who actually carries it has nothing to do with who hands the money to the government — it depends on elasticities.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Demand</span><span class="key"><i class="" style="background:var(--k2)"></i>Supply</span><span class="key"><i class="sq" style="background:var(--k4)"></i>Tax revenue</span><span class="key"><i class="sq" style="background:var(--k6)"></i>Deadweight loss</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Tax per unit (€)</span><output for="tax"></output></span><input type="range" id="tax" min="0" max="60" step="1" value="20"></label><label class="ctl"><span class="ctl-h"><span>Demand steepness</span><output for="bd" data-fmt="dec2"></output></span><input type="range" id="bd" min="0.3" max="2" step="0.05" value="0.8"></label><label class="ctl"><span class="ctl-h"><span>Supply steepness</span><output for="bs" data-fmt="dec2"></output></span><input type="range" id="bs" min="0.3" max="2" step="0.05" value="0.6"></label><label class="ctl check"><input type="checkbox" id="areas" checked>Show areas</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"bd": 1.8, "bs": 0.5}'>Inelastic demand (fuel)</button><button type="button" data-set='{"bd": 0.35, "bs": 1.2}'>Elastic demand</button><button type="button" data-set='{"bd": 0.8, "bs": 0.8}'>Equal slopes</button><button type="button" data-set='{"tax": 0}'>No tax</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A tax of €t per unit means buyers pay one price and sellers keep a price €t lower. On the graph, it acts like shifting supply up by the tax (or demand down — the result is identical). The quantity traded falls to the point where the gap between the curves equals the tax.</p>
+<p>The government collects the purple rectangle: tax × quantity still traded. But the market also loses the yellow triangle, the <strong>deadweight loss</strong>: trades that would have been worth more to buyers than they cost sellers, which no longer happen because of the tax. Nobody receives this value; it simply disappears.</p>
+<p><strong>Tax incidence</strong> is about who really pays. It doesn't matter whether the law says the seller or the buyer hands over the money; what matters is who is less able to change their behaviour. The side with the <strong>less elastic</strong> (steeper) curve carries more of the burden. That's why excise taxes on fuel, alcohol and tobacco mostly land on consumers.</p>
+<p>Deadweight loss grows roughly with the <strong>square</strong> of the tax: doubling a tax about quadruples the loss. Many small taxes on broad bases cause less damage than one big tax on a narrow base.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Inelastic demand</b>. Buyers now carry most of the tax, and the deadweight loss is small because quantity barely falls.</li><li>Click <b>Elastic demand</b>. The same tax now mostly hits sellers, and the quantity drop (and the triangle) is much bigger.</li><li>Set the tax to 20, note the deadweight loss, then set it to 40. The loss roughly quadruples.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Assuming the side that legally pays the tax is the side that bears it.</li><li>Thinking tax revenue is the cost of the tax. The true cost to society is revenue plus the deadweight loss.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Pbuyers − Psellers = t</p><p class="fnote">The tax wedge</p><p class="formula">Revenue = t × Qafter</p><p class="fnote">Government revenue</p><p class="formula">DWL ≈ ½ × t × ΔQ</p><p class="fnote">Deadweight loss triangle</p><p class="formula">Buyers&#x27; share ≈ Es / (Es + |Ed|)</p><p class="fnote">Incidence with elasticities</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Tax incidence</dt><dd lang="lv">Nodokļa sloga sadalījums</dd><dt>Excise tax</dt><dd lang="lv">Akcīzes nodoklis</dd><dt>Deadweight loss</dt><dd lang="lv">Neto zaudējumi sabiedrībai</dd><dt>Tax wedge</dt><dd lang="lv">Nodokļa ķīlis</dd><dt>Tax burden</dt><dd lang="lv">Nodokļu slogs</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Elasticity” — section on elasticity and tax incidence</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Unit on government intervention and taxes</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="elasticity.html"><span>← Previous</span><b>Price elasticity of demand</b></a><a class="next" href="ppf.html"><span>Next →</span><b>Production possibilities and opportunity cost</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 150], y: [0, 110], xLabel: "Quantity (Q)", yLabel: "Price (€)", title: "Tax wedge diagram" });
+EP.controls(["tax", "bd", "bs", "areas"], v => {
+  const t = v.tax, bd = v.bd, bs = v.bs;
+  const Q0 = 90 / (bd + bs), P0 = 100 - bd * Q0;
+  const Qt = Math.max(0, (90 - t) / (bd + bs)), Pb = 100 - bd * Qt, Pk = Pb - t;
+  const xmax = Math.ceil(Math.min(300, Q0 * 1.35) / 10) * 10; p.setDomain([0, xmax]);
+  p.begin().axes();
+  if (v.areas) {
+    p.area([[0, 100], [Qt, Pb], [0, Pb]], "a1").area([[0, Pk], [Qt, Pk], [0, 10]], "a2");
+    if (t) p.rect(0, Pk, Qt, Pb, "a4").area([[Qt, Pb], [Q0, P0], [Qt, Pk]], "a6");
+  }
+  p.fn(q => 100 - bd * q, "c1").fn(q => 10 + bs * q, "c2");
+  if (t) p.fn(q => 10 + t + bs * q, "c2 dash thin");
+  const lq = Math.min(xmax * 0.92, 95 / bd), sq = Math.min(xmax * 0.9, (104 - 10) / bs), tq = Math.min(xmax * 0.8, (104 - 10 - t) / bs);
+  p.text(lq, 100 - bd * lq, "D", "l1", "start", 6, -4).text(sq, 10 + bs * sq, "S", "l2", "start", 6, 4);
+  if (t) p.text(tq, 10 + t + bs * tq, "S + tax", "l2", "end", -6, -8);
+  if (t) { p.dot(Q0, P0, "hollow", 4.5); p.seg(Qt, Pk, Qt, Pb, "c4 thin"); p.guide(Qt, Pb, EP.fmt(Qt), "buyers €" + EP.fmt(Pb)).dot(Qt, Pb).guide(Qt, Pk, null, "sellers €" + EP.fmt(Pk)).dot(Qt, Pk); }
+  else p.guide(Q0, P0, EP.fmt(Q0), "€" + EP.fmt(P0)).dot(Q0, P0);
+  p.end();
+  const rev = t * Qt, dwl = 0.5 * t * (Q0 - Qt), bShare = t ? (Pb - P0) / t : bd / (bd + bs);
+  EP.readout([["Buyers pay", EP.money(Pb)], ["Sellers keep", EP.money(Pk)], ["Quantity: before → after", EP.fmt(Q0) + " → " + EP.fmt(Qt)], ["Tax revenue", EP.money(rev, 0)], ["Deadweight loss", EP.money(dwl, 0), dwl > 0.5 ? "bad" : ""], ["Burden on buyers", EP.fmt(bShare * 100, 0) + "%"], ["Burden on sellers", EP.fmt((1 - bShare) * 100, 0) + "%"]],
+    t === 0 ? "No tax yet — drag the tax slider to open a wedge between the price buyers pay and the price sellers keep."
+    : `Buyers' price rose by <b>€${EP.fmt(Pb - P0)}</b> and sellers' price fell by <b>€${EP.fmt(P0 - Pk)}</b>. ${bShare > 0.55 ? "Buyers carry most of the tax because demand is the steeper (less elastic) curve — they can't easily walk away." : bShare < 0.45 ? "Sellers carry most of the tax because supply is the steeper (less elastic) curve." : "The burden is split roughly evenly because the curves are similarly steep."} The yellow triangle is trades that no longer happen — lost value nobody collects.`);
+});
+</script>
+</body>
+</html>

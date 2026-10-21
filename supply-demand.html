@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supply and demand · Econ Playground</title>
+<meta name="description" content="Shift the curves, set a price ceiling or floor, and watch shortages, surpluses and welfare change.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 1 of 12</div>
+<h1>Supply and demand</h1>
+<p class="lede">Prices come from two groups pulling in opposite directions: buyers who want more when it&#x27;s cheap, and sellers who offer more when it pays well. Where they meet is the equilibrium.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Demand (D)</span><span class="key"><i class="" style="background:var(--k2)"></i>Supply (S)</span><span class="key"><i class="sq" style="background:var(--k1)"></i>Consumer surplus</span><span class="key"><i class="sq" style="background:var(--k2)"></i>Producer surplus</span><span class="key"><i class="sq" style="background:var(--k6)"></i>Deadweight loss</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Demand shift</span><output for="dShift"></output></span><input type="range" id="dShift" min="-30" max="30" step="1" value="0"></label><label class="ctl"><span class="ctl-h"><span>Supply shift</span><output for="sShift"></output></span><input type="range" id="sShift" min="-30" max="30" step="1" value="0"></label><label class="ctl"><span class="ctl-h"><span>Price control</span></span><select id="ctrl"><option value="none">None</option><option value="ceiling">Price ceiling (maximum)</option><option value="floor">Price floor (minimum)</option></select></label><div id="levelRow" hidden><label class="ctl"><span class="ctl-h"><span>Control level (€)</span><output for="level"></output></span><input type="range" id="level" min="5" max="115" step="1" value="35"></label></div><label class="ctl check"><input type="checkbox" id="areas" checked>Show consumer &amp; producer surplus</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"dShift": 20, "sShift": 0, "ctrl": "none"}'>Demand rises</button><button type="button" data-set='{"dShift": 0, "sShift": 20, "ctrl": "none"}'>Supply falls</button><button type="button" data-set='{"dShift": 0, "sShift": 0, "ctrl": "ceiling", "level": 30}'>Rent cap</button><button type="button" data-set='{"dShift": 0, "sShift": 0, "ctrl": "floor", "level": 60}'>Minimum price</button><button type="button" data-set='{"dShift": 0, "sShift": 0, "ctrl": "none", "level": 35}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>The <strong>demand curve</strong> slopes down: when something gets cheaper, people buy more of it (and some new buyers appear). The <strong>supply curve</strong> slopes up: a higher price makes it worth producing more, and lets higher-cost producers join in.</p>
+<p>The <strong>equilibrium</strong> is where the two cross. At any higher price, sellers would be left with unsold goods and would cut prices; at any lower price, buyers would compete for too few goods and bid the price up. The market drifts back to the crossing point.</p>
+<p>It's crucial to separate a <strong>movement along a curve</strong> (the price changed) from a <strong>shift of the curve</strong> (something else changed). Demand shifts with income, tastes, prices of related goods, expectations and the number of buyers. Supply shifts with input costs, technology, taxes and subsidies, and the number of sellers.</p>
+<p>The shaded areas measure who gains from trade. <strong>Consumer surplus</strong> is the gap between what buyers would have been willing to pay and what they actually pay. <strong>Producer surplus</strong> is the gap between the price and the lowest price sellers would have accepted. A free market maximises their sum; a binding price control shrinks it and creates a <strong>deadweight loss</strong>.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Demand rises</b>. Both price and quantity go up. Now try <b>Supply falls</b> — price goes up but quantity goes <em>down</em>. Same price change, opposite story.</li><li>Pick a <b>price ceiling</b> and drag it below the equilibrium. Watch the shortage grow as the ceiling falls — this is the textbook argument about rent caps.</li><li>Set a ceiling <em>above</em> the equilibrium. Nothing happens: a control only matters if it binds.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Saying “demand increased” when only the price fell. A lower price moves you <em>along</em> the demand curve; the curve itself didn't move.</li><li>Thinking a price ceiling helps all buyers. Those who get the good pay less, but some buyers can't get it at all.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Qd = Qs</p><p class="fnote">Equilibrium condition</p><p class="formula">CS = area under D, above price</p><p class="fnote">Consumer surplus</p><p class="formula">PS = area above S, below price</p><p class="fnote">Producer surplus</p><p class="formula">Here: P = 80 − 0.8Q (D), P = 10 + 0.6Q (S)</p><p class="fnote">The curves used in this graph</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Demand</dt><dd lang="lv">Pieprasījums</dd><dt>Supply</dt><dd lang="lv">Piedāvājums</dd><dt>Equilibrium price</dt><dd lang="lv">Līdzsvara cena</dd><dt>Shortage</dt><dd lang="lv">Deficīts</dd><dt>Surplus</dt><dd lang="lv">Pārpalikums</dd><dt>Consumer surplus</dt><dd lang="lv">Patērētāja ieguvums</dd><dt>Price ceiling</dt><dd lang="lv">Cenu griesti</dd><dt>Price floor</dt><dd lang="lv">Minimālā cena (cenu grīda)</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Demand and Supply”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Unit on supply, demand and market equilibrium</span></li><li><a href="https://www.core-econ.org/" target="_blank" rel="noopener">CORE Econ — The Economy</a><span>Free online textbook with real-world data</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a class="next" href="elasticity.html"><span>Next →</span><b>Price elasticity of demand</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 100], y: [0, 120], xLabel: "Quantity (Q)", yLabel: "Price (€)", title: "Supply and demand diagram" });
+const Pd = (q, d) => 80 + d - 0.8 * q, Ps = (q, s) => 10 + s + 0.6 * q;
+EP.controls(["dShift", "sShift", "ctrl", "level", "areas"], v => {
+  const d = v.dShift, s = v.sShift;
+  document.getElementById("levelRow").hidden = v.ctrl === "none";
+  const Qe = Math.max(0, (70 + d - s) / 1.4), Pe = Ps(Qe, s);
+  const Qd = P => Math.max(0, (80 + d - P) / 0.8), Qs = P => Math.max(0, (P - 10 - s) / 0.6);
+  let Pb = Pe, Qt = Qe, kind = "";
+  if (v.ctrl === "ceiling" && v.level < Pe) { Pb = v.level; Qt = Qs(Pb); kind = "shortage"; }
+  if (v.ctrl === "floor" && v.level > Pe) { Pb = v.level; Qt = Qd(Pb); kind = "surplus"; }
+  const cs = [[0, Pd(0, d)], [Qt, Pd(Qt, d)], [Qt, Pb], [0, Pb]];
+  const ps = [[0, Pb], [Qt, Pb], [Qt, Ps(Qt, s)], [0, Ps(0, s)]];
+  const dwl = [[Qt, Pd(Qt, d)], [Qe, Pe], [Qt, Ps(Qt, s)]];
+  p.begin().axes();
+  if (v.areas) { p.area(cs, "a1").area(ps, "a2"); if (kind) p.area(dwl, "a6"); }
+  if (d) p.fn(q => Pd(q, 0), "cg"); if (s) p.fn(q => Ps(q, 0), "cg");
+  p.fn(q => Pd(q, d), "c1").fn(q => Ps(q, s), "c2");
+  const qD = Math.min(96, (80 + d - 6) / 0.8), qS = Math.min(96, (114 - 10 - s) / 0.6);
+  p.text(qD, Pd(qD, d), "D", "l1", "start", 6, -6).text(qS, Ps(qS, s), "S", "l2", "start", 6, 4);
+  if (v.ctrl !== "none") {
+    p.seg(0, v.level, 100, v.level, "c4 thin dash").text(99, v.level, v.ctrl === "ceiling" ? "ceiling" : "floor", "l4", "end", 0, -7);
+  }
+  if (kind) {
+    const a = kind === "shortage" ? Qt : Qd(Pb), b = kind === "shortage" ? Qd(Pb) : Qs(Pb);
+    p.seg(a, Pb, b, Pb, "c5").text((a + b) / 2, Pb, kind, "l5", "middle", 0, kind === "shortage" ? 18 : -10);
+    p.guide(Qt, Pb, EP.fmt(Qt), "€" + EP.fmt(Pb)).dot(Qt, Pb).dot(Qe, Pe, "hollow", 4.5);
+  } else p.guide(Qe, Pe, EP.fmt(Qe), "€" + EP.fmt(Pe)).dot(Qe, Pe);
+  p.end();
+  const CS = EP.polyArea(cs), PS = EP.polyArea(ps), DWL = kind ? EP.polyArea(dwl) : 0;
+  const rows = [["Equilibrium price", EP.money(Pe)], ["Equilibrium quantity", EP.fmt(Qe)]];
+  if (kind) rows.push(["Price under control", EP.money(Pb)], ["Quantity actually traded", EP.fmt(Qt)], [kind === "shortage" ? "Shortage" : "Surplus (unsold)", EP.fmt(Math.abs(Qd(Pb) - Qs(Pb))), "bad"]);
+  rows.push(["Consumer surplus", EP.money(CS, 0)], ["Producer surplus", EP.money(PS, 0)], ["Deadweight loss", EP.money(DWL, 0), DWL ? "bad" : ""]);
+  let note;
+  if (kind === "shortage") note = `The ceiling (€${EP.fmt(Pb)}) is below the equilibrium price, so buyers want <b>${EP.fmt(Qd(Pb))}</b> units but sellers only offer <b>${EP.fmt(Qt)}</b>. That gap is a shortage: queues, waiting lists or under-the-counter deals. Fewer trades happen, and the yellow triangle is value that simply disappears.`;
+  else if (kind === "surplus") note = `The floor (€${EP.fmt(Pb)}) is above equilibrium, so sellers offer more than buyers want. The unsold surplus has to go somewhere — stockpiles, government purchases, or (for a minimum wage) unemployment.`;
+  else if (v.ctrl !== "none") note = `The ${v.ctrl} is set at €${EP.fmt(v.level)}, which ${v.ctrl === "ceiling" ? "is above" : "is below"} the equilibrium price. It doesn't bind, so the market clears normally.`;
+  else if (d && s) note = `Both curves moved. When demand and supply shift together, one of price or quantity has a clear direction and the other depends on which shift is bigger.`;
+  else if (d) note = `Demand moved ${d > 0 ? "right (up)" : "left (down)"}: at every price people want ${d > 0 ? "more" : "less"}. Price and quantity both ${d > 0 ? "rise" : "fall"}.`;
+  else if (s) note = `Supply moved ${s > 0 ? "up (left) — producing got more expensive" : "down (right) — producing got cheaper"}. Price ${s > 0 ? "rises" : "falls"} while quantity ${s > 0 ? "falls" : "rises"}.`;
+  else note = `At €${EP.fmt(Pe)}, the amount buyers want equals the amount sellers offer. Above that price there'd be unsold goods pushing the price down; below it, a shortage pushing it up.`;
+  EP.readout(rows, note);
+});
+</script>
+</body>
+</html>

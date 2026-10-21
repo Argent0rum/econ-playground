@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IS–LM: fiscal and monetary policy · Econ Playground</title>
+<meta name="description" content="Use government spending and the money supply and see interest rates, output and crowding out.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Macroeconomics · Topic 11 of 12</div>
+<h1>IS–LM: fiscal and monetary policy</h1>
+<p class="lede">IS–LM puts the goods market and the money market on one graph. It shows why a fiscal stimulus raises interest rates, and why monetary policy lowers them.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>IS (goods market)</span><span class="key"><i class="" style="background:var(--k2)"></i>LM (money market)</span><span class="key"><i style="background:var(--line-2)"></i>Starting position</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Government spending</span><output for="G"></output></span><input type="range" id="G" min="50" max="250" step="5" value="150"></label><label class="ctl"><span class="ctl-h"><span>Money supply</span><output for="M"></output></span><input type="range" id="M" min="100" max="400" step="5" value="200"></label><label class="ctl"><span class="ctl-h"><span>Marginal propensity to consume</span><output for="c" data-fmt="dec2"></output></span><input type="range" id="c" min="0.4" max="0.8" step="0.01" value="0.6"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"G": 200, "M": 200}'>Fiscal stimulus</button><button type="button" data-set='{"G": 150, "M": 260}'>Monetary easing</button><button type="button" data-set='{"G": 200, "M": 260}'>Both together</button><button type="button" data-set='{"G": 100, "M": 200}'>Austerity</button><button type="button" data-set='{"G": 150, "M": 200, "c": 0.6}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>The <strong>IS curve</strong> shows combinations of the interest rate and output where the goods market is in equilibrium. It slopes down: a lower interest rate makes borrowing cheaper, investment rises, and through the multiplier output rises. Fiscal policy (government spending, taxes) shifts IS.</p>
+<p>The <strong>LM curve</strong> shows where the money market is in equilibrium: the demand for money (which rises with income and falls with the interest rate) equals the supply set by the central bank. It slopes up: higher income means people want more money for transactions, which pushes the interest rate up. Monetary policy shifts LM.</p>
+<p>Where they cross, both markets clear. A fiscal expansion moves IS right and raises both output and the interest rate. The higher rate discourages private investment — <strong>crowding out</strong> — so the effect on output is smaller than the simple multiplier suggests. A monetary expansion moves LM right, lowering the rate and raising output.</p>
+<p>A practical note for Latvia: as a euro area member, it has no monetary policy of its own — the European Central Bank sets interest rates for all members. So in a Latvian recession, fiscal policy is the main national tool. IS–LM is a simplified model (modern central banks set an interest rate rather than a money supply), but it's still the standard way to think about policy mixes.</p>
+    <h2>Try this</h2>
+    <ol><li>Click <b>Fiscal stimulus</b> and compare the two multipliers in the readout: that difference is crowding out.</li><li>Click <b>Both together</b>. The interest rate barely moves but output jumps — policies that support each other.</li><li>Raise the MPC and watch the IS curve flatten: the economy becomes more sensitive to interest rate changes.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Moving along the curve when the policy should shift it: government spending shifts IS, the money supply shifts LM.</li><li>Forgetting that IS–LM holds the price level fixed — it's a short-run model.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">IS: Y = (C₀ + I₀ + G − b·r) / (1 − MPC)</p><p class="fnote">Goods market</p><p class="formula">LM: M/P = k·Y − h·r</p><p class="fnote">Money market</p><p class="formula">Fiscal multiplier with crowding out: 1 / (1 − MPC + b·k/h)</p><p class="fnote">Smaller than 1 / (1 − MPC)</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Interest rate</dt><dd lang="lv">Procentu likme</dd><dt>Money supply</dt><dd lang="lv">Naudas piedāvājums</dd><dt>Money demand</dt><dd lang="lv">Naudas pieprasījums</dd><dt>Crowding out</dt><dd lang="lv">Izspiešanas efekts</dd><dt>Fiscal policy</dt><dd lang="lv">Fiskālā politika</dd><dt>Monetary policy</dt><dd lang="lv">Monetārā politika</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://www.khanacademy.org/economics-finance-domain/macroeconomics" target="_blank" rel="noopener">Khan Academy — Macroeconomics</a><span>Units on financial sector and long-run consequences of policy</span></li><li><a href="https://www.core-econ.org/" target="_blank" rel="noopener">CORE Econ — The Economy</a><span>Macro chapters on fiscal and monetary policy</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="ad-as.html"><span>← Previous</span><b>Aggregate demand and aggregate supply</b></a><a class="next" href="interest-inflation.html"><span>Next →</span><b>Compound interest, inflation and real value</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [300, 1300], y: [0, 16], xLabel: "Output Y", yLabel: "Interest rate r (%)", title: "IS–LM diagram" });
+const A = 200, bI = 10, k = 0.5, h = 20, G0 = 150, M0 = 200, c0 = 0.6;
+const solve = (G, M, c) => { const Y = (A + G + bI * M / h) / (1 - c + bI * k / h); return [Y, (k * Y - M) / h]; };
+const [Y0, r0] = solve(G0, M0, c0);
+EP.controls(["G", "M", "c"], v => {
+  const { G, M, c } = v; const [Y, r] = solve(G, M, c);
+  const IS = (y, g, cc) => (A + g - (1 - cc) * y) / bI, LM = (y, m) => (k * y - m) / h;
+  p.begin().axes({ fy: y => y + "%" });
+  if (G !== G0 || c !== c0) p.fn(y => IS(y, G0, c0), "cg"); if (M !== M0) p.fn(y => LM(y, M0), "cg");
+  p.fn(y => IS(y, G, c), "c1").fn(y => LM(y, M), "c2");
+  const yi = Math.min(1250, (A + G - (1 - c) * 1) / (1 - c)), yl = Math.min(1260, (15 * h + M) / k);
+  p.text(Math.min(1240, (A + G - 1.5 * bI) / (1 - c)), 1.5, "IS", "l1", "end", -6, -6).text(yl, LM(yl, M), "LM", "l2", "end", -8, 0);
+  if (Math.abs(Y - Y0) > 0.5 || Math.abs(r - r0) > 0.01) p.dot(Y0, r0, "hollow", 4.5);
+  p.guide(Y, r, EP.fmt(Y, 0), EP.fmt(r, 1) + "%").dot(Y, r);
+  p.end();
+  const dG = G - G0, simple = 1 / (1 - c), eff = 1 / (1 - c + bI * k / h);
+  const noCrowd = dG * simple, actualFromG = dG * eff;
+  const rows = [["Output", EP.fmt(Y, 0)], ["Interest rate", EP.fmt(r, 2) + "%"], ["Change in output", (Y >= Y0 ? "+" : "−") + EP.fmt(Math.abs(Y - Y0), 0)], ["Change in interest rate", (r >= r0 ? "+" : "−") + EP.fmt(Math.abs(r - r0), 2) + " pp"], ["Simple multiplier", EP.fmt(simple, 2)], ["Multiplier with crowding out", EP.fmt(eff, 2)]];
+  let note;
+  if (dG && M === M0) note = `Government spending ${dG > 0 ? "rose" : "fell"} by ${EP.fmt(Math.abs(dG), 0)}. With interest rates fixed, output would have moved by <b>${EP.fmt(Math.abs(noCrowd), 0)}</b>. But higher income raises demand for money and pushes the interest rate ${dG > 0 ? "up" : "down"}, which ${dG > 0 ? "cuts" : "boosts"} private investment, so output only moves by <b>${EP.fmt(Math.abs(actualFromG), 0)}</b>. That difference is <b>crowding out</b>.`;
+  else if (M !== M0 && !dG) note = `The central bank ${M > M0 ? "increased" : "reduced"} the money supply. LM shifts ${M > M0 ? "right" : "left"}: the interest rate ${M > M0 ? "falls" : "rises"}, which ${M > M0 ? "encourages" : "discourages"} investment and moves output ${M > M0 ? "up" : "down"}.`;
+  else if (M !== M0 && dG) note = `Fiscal and monetary policy together: extra spending shifts IS right while more money shifts LM right. Output can rise a lot with little change in interest rates — the central bank is “accommodating” the fiscal stimulus.`;
+  else note = c !== c0 ? `A ${c > c0 ? "higher" : "lower"} MPC makes the IS curve ${c > c0 ? "flatter" : "steeper"} and shifts it ${c > c0 ? "out" : "in"}: households spend a ${c > c0 ? "bigger" : "smaller"} share of extra income.` : "This is the starting equilibrium: the goods market (IS) and the money market (LM) are both in balance. Use the sliders or scenarios to apply policy.";
+  EP.readout(rows, note);
+});
+</script>
+</body>
+</html>

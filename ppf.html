@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Production possibilities and opportunity cost · Econ Playground</title>
+<meta name="description" content="Choose what an economy produces and see why each extra unit costs more than the last.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Microeconomics · Topic 4 of 12</div>
+<h1>Production possibilities and opportunity cost</h1>
+<p class="lede">An economy has limited workers, machines and land. The production possibilities frontier shows the best combinations it can make — and every point on it involves giving something up.</p>
+
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Frontier (PPF)</span><span class="key"><i class="" style="background:var(--k2)"></i>Opportunity cost at this point (slope)</span><span class="key"><i style="background:var(--line-2)"></i>Original frontier</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Mix: more tech ← → more food</span><output for="pos" data-post="°"></output></span><input type="range" id="pos" min="5" max="85" step="1" value="45"></label><label class="ctl"><span class="ctl-h"><span>How fully resources are used</span><output for="eff" data-fmt="pct"></output></span><input type="range" id="eff" min="50" max="100" step="1" value="100"></label><label class="ctl"><span class="ctl-h"><span>Max food (all resources on food)</span><output for="X"></output></span><input type="range" id="X" min="40" max="120" step="1" value="100"></label><label class="ctl"><span class="ctl-h"><span>Max tech (all resources on tech)</span><output for="Y"></output></span><input type="range" id="Y" min="40" max="120" step="1" value="100"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"X": 120, "Y": 120, "eff": 100}'>Economic growth</button><button type="button" data-set='{"X": 100, "Y": 120, "eff": 100}'>Better tech only</button><button type="button" data-set='{"X": 100, "Y": 100, "eff": 72}'>Recession</button><button type="button" data-set='{"X": 100, "Y": 100, "eff": 100, "pos": 45}'>Reset</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>The <strong>production possibilities frontier (PPF)</strong> shows every combination of two goods an economy can produce if it uses all its resources efficiently. Points inside are possible but wasteful; points outside are impossible with today's resources and technology.</p>
+<p>Moving along the frontier means choosing. The <strong>opportunity cost</strong> of more food is the tech you give up to get it — the slope of the curve at that point. Because the curve bows outward, that cost rises as you specialise: the first workers moved into farming are natural farmers, the last ones are engineers who are terrible at it.</p>
+<p><strong>Economic growth</strong> pushes the whole frontier outward: more workers, more capital, better skills or new technology. Growth that improves only one industry stretches the frontier mostly in one direction.</p>
+<p>Points inside the frontier represent <strong>unemployment or inefficiency</strong>. Getting back to the frontier, for example by recovering from a recession, gives you more of everything without any trade-off.</p>
+    <h2>Try this</h2>
+    <ol><li>Slide the mix all the way toward food and watch the “cost of 1 more food” number shoot up.</li><li>Click <b>Recession</b>: the point falls inside the curve. Notice you could move up and right — more of both goods.</li><li>Click <b>Better tech only</b>. The frontier stretches upward, and the opportunity cost of food rises (each unit of food now means giving up more of the more productive tech).</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Treating opportunity cost as money. It's the next-best thing you give up, measured in the other good.</li><li>Drawing a straight-line PPF and then talking about increasing costs. A straight line means constant opportunity cost.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Opportunity cost of X = |ΔY / ΔX|</p><p class="fnote">Slope of the PPF</p><p class="formula">Here: (x / Xmax)² + (y / Ymax)² = 1</p><p class="fnote">The bowed frontier used</p><p class="formula">Inside the PPF: unemployment, inefficiency</p><p class="fnote">Outside: currently unattainable</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Production possibilities frontier</dt><dd lang="lv">Ražošanas iespēju robeža</dd><dt>Opportunity cost</dt><dd lang="lv">Alternatīvās izmaksas</dd><dt>Scarcity</dt><dd lang="lv">Ierobežotība (retums)</dd><dt>Efficiency</dt><dd lang="lv">Efektivitāte</dd><dt>Economic growth</dt><dd lang="lv">Ekonomiskā izaugsme</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Choice in a World of Scarcity”</span></li><li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics" target="_blank" rel="noopener">Khan Academy — Microeconomics</a><span>Unit on basic economic concepts</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="taxes.html"><span>← Previous</span><b>Taxes, who pays, and deadweight loss</b></a><a class="next" href="costs-competition.html"><span>Next →</span><b>Costs and perfect competition</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 130], y: [0, 130], xLabel: "Food (units)", yLabel: "Tech (units)", title: "Production possibilities frontier" });
+EP.controls(["pos", "eff", "X", "Y"], v => {
+  const th = v.pos * Math.PI / 180, X = v.X, Y = v.Y, k = v.eff / 100;
+  const fx = X * Math.cos(th), fy = Y * Math.sin(th), x = fx * k, y = fy * k;
+  const oc = (Y / X) / Math.tan(th);
+  const curve = (XX, YY) => { const pts = []; for (let i = 0; i <= 90; i++) { const a = i * Math.PI / 180; pts.push([XX * Math.cos(a), YY * Math.sin(a)]); } return pts; };
+  p.begin().axes();
+  p.area([[0, 0]].concat(curve(X, Y)), "a1");
+  if (X !== 100 || Y !== 100) p.line(curve(100, 100), "cg");
+  p.line(curve(X, Y), "c1");
+  const dx = 18; p.seg(fx - dx, fy + oc * dx, fx + dx, fy - oc * dx, "c2 thin");
+  p.dot(130 * 0.85, 130 * 0.85, "hollow", 4).text(130 * 0.85, 130 * 0.85, "unattainable", "sm", "end", -8, -6);
+  if (k < 1) p.dot(fx, fy, "hollow", 4.5);
+  p.guide(x, y, EP.fmt(x, 0), EP.fmt(y, 0)).dot(x, y);
+  p.text(X * 0.72, Y * 0.72, "PPF", "l1", "start", 12, -2);
+  p.end();
+  EP.readout([["Food produced", EP.fmt(x, 0)], ["Tech produced", EP.fmt(y, 0)], ["Cost of 1 more food", EP.fmt(oc, 2) + " tech"], ["Cost of 1 more tech", EP.fmt(1 / oc, 2) + " food"], ["Point is", k < 1 ? "inside (inefficient)" : "on the frontier (efficient)", k < 1 ? "bad" : "good"]],
+    k < 1 ? `The economy is producing <b>inside</b> its frontier — some workers or machines are idle, as in a recession. It could have more of <em>both</em> goods without giving anything up.`
+    : `Here, one more unit of food means giving up about <b>${EP.fmt(oc, 2)}</b> units of tech. Slide toward more food and that number climbs: the resources moved last are the ones least suited to farming. That's the law of increasing opportunity cost.`);
+});
+</script>
+</body>
+</html>
