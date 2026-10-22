@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hypothesis tests, p-values and power · Econ Playground</title>
+<meta name="description" content="Test whether a tutoring programme raises exam scores, and see significance level, p-values, type I and II errors and power.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 14 of 18</div>
+<h1>Hypothesis tests, p-values and power</h1>
+<p class="lede">A hypothesis test asks whether a result is too large to be just luck. The significance level, the sample size and the size of the real effect decide how often the test gets it right.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k4)"></i>If there is no effect (H₀)</span><span class="key"><i class="" style="background:var(--k1)"></i>With the real effect</span><span class="key"><i class="sq" style="background:var(--k2)"></i>Rejection region (α)</span><span class="key"><i class="sq" style="background:var(--k3)"></i>Power</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Real effect of tutoring (points)</span><output for="eff" data-fmt="" data-pre="+" data-post=""></output></span><input type="range" id="eff" min="0" max="15" step="0.5" value="4"></label><label class="ctl"><span class="ctl-h"><span>Students per group (n)</span><output for="n" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="n" min="5" max="200" step="1" value="30"></label><label class="ctl"><span class="ctl-h"><span>Spread of scores σ (points)</span><output for="sig" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="sig" min="5" max="30" step="1" value="15"></label><label class="ctl"><span class="ctl-h"><span>Significance level α</span></span><select id="alpha"><option value="0.10">10%</option><option value="0.05" selected>5%</option><option value="0.01">1%</option></select></label><label class="ctl"><span class="ctl-h"><span>Test</span></span><select id="sides"><option value="2" selected>Two-sided (any difference)</option><option value="1">One-sided (only an increase)</option></select></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"eff": 0}'>No real effect</button><button type="button" data-set='{"n": 10, "eff": 4}'>Small study</button><button type="button" data-set='{"n": 200, "eff": 4}'>Big study</button><button type="button" data-set='{"alpha": "0.01"}'>Strict α = 1%</button><button type="button" id="run">Run one study</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A university tries a tutoring programme: one group of n students gets tutoring, another doesn't, and we compare average exam scores. The <strong>null hypothesis H₀</strong> says tutoring does nothing; any difference is luck. The <strong>alternative H₁</strong> says it raises scores.</p>
+<p>We turn the difference into a <strong>test statistic</strong>, t = difference ÷ standard error. If H₀ is true, t follows the purple curve centred on 0. We pick a <strong>significance level α</strong> (usually 5%) and reject H₀ when t lands in the orange tail — results that would happen less than α of the time by luck. The <strong>p-value</strong> is the probability of a result at least as extreme as ours if H₀ were true.</p>
+<p>Two mistakes are possible. A <strong>type I error</strong> rejects H₀ when it is true (probability α). A <strong>type II error</strong> keeps H₀ when there really is an effect (probability β). <strong>Power</strong> = 1 − β is the chance of detecting a real effect — the green area under the blue curve.</p>
+<p>Power grows with the size of the effect and with the sample size, and falls when you make α stricter. Small studies of small effects are mostly noise: even when the effect is real they usually “find nothing”. This matters for your own empirical work — “not significant” often just means “not enough data”.</p>
+    <h2>Try this</h2>
+    <ol><li>Set the effect to 0 and press <b>Run one study</b> twenty times. About one study in twenty is still “significant” at 5% — that's α.</li><li>Choose <b>Small study</b>. The real effect is there, but power is low, so most single studies miss it.</li><li>Now choose <b>Big study</b>. The blue curve moves far right and power gets close to 100%.</li><li>Switch to α = 1%. Fewer false alarms, but power drops: the two errors trade off.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Reading p = 0.03 as “3% chance that H₀ is true”. The p-value assumes H₀ is true; it says how surprising the data would be in that case.</li><li>Treating “not significant” as “no effect”. With low power, a real effect is easy to miss.</li><li>Treating “significant” as “important”. With a huge sample, a tiny, useless effect can be highly significant.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">t = (x̄₁ − x̄₂) / SE</p><p class="fnote">Test statistic for a difference in means</p><p class="formula">SE = σ · √(2/n)</p><p class="fnote">Standard error of the difference, two groups of n</p><p class="formula">Reject H₀ if |t| > t*(α)</p><p class="fnote">Decision rule (two-sided)</p><p class="formula">Power = 1 − β</p><p class="fnote">Chance of detecting a real effect</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Null hypothesis</dt><dd lang="lv">Nulles hipotēze</dd><dt>Alternative hypothesis</dt><dd lang="lv">Alternatīvā hipotēze</dd><dt>Significance level</dt><dd lang="lv">Nozīmības līmenis</dd><dt>p-value</dt><dd lang="lv">p-vērtība</dd><dt>Type I error</dt><dd lang="lv">Pirmā veida kļūda</dd><dt>Type II error</dt><dd lang="lv">Otrā veida kļūda</dd><dt>Power of a test</dt><dd lang="lv">Testa jauda</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Statistics 2e</a><span>Chapters “Hypothesis Testing with One Sample / Two Samples”</span></li><li><a href="https://seeing-theory.brown.edu/" target="_blank" rel="noopener">Seeing Theory (Brown University)</a><span>Chapter “Frequentist inference”</span></li><li><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener">Khan Academy — Statistics and probability</a><span>Unit on significance tests</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="confidence-intervals.html"><span>← Previous</span><b>Samples and confidence intervals</b></a><a class="next" href="regression.html"><span>Next →</span><b>Correlation and least-squares regression</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const p = EP.plot("fig", { x: [-5, 9], y: [0, 0.45], h: 400, xLabel: "Test statistic t", yLabel: "Density", title: "Sampling distributions under H0 and with the real effect" });
+let seed = 3, last = null;
+document.getElementById("run").addEventListener("click", () => {
+  const v = ctl.read(), r = ST.rng(seed++ * 7919), n = v.n;
+  const a = [], b = []; for (let i = 0; i < n; i++) { a.push(60 + v.sig * ST.normal(r)); b.push(60 + v.eff + v.sig * ST.normal(r)); }
+  const d = ST.mean(b) - ST.mean(a), se = Math.sqrt((ST.sd(a) ** 2 + ST.sd(b) ** 2) / n), t = d / se, df = 2 * n - 2;
+  const pv = v.sides === "2" ? 2 * (1 - ST.tcdf(Math.abs(t), df)) : 1 - ST.tcdf(t, df);
+  last = { d, t, pv }; ctl.update();
+});
+const ctl = EP.controls(["eff", "n", "sig", "alpha", "sides"], v => {
+  const alpha = +v.alpha, two = v.sides === "2", se = v.sig * Math.sqrt(2 / v.n), shift = v.eff / se;
+  const crit = ST.ninv(1 - (two ? alpha / 2 : alpha));
+  const power = (1 - ST.ncdf(crit - shift)) + (two ? ST.ncdf(-crit - shift) : 0);
+  p.setDomain([-5, Math.max(9, shift + 4)]);
+  p.begin().axes();
+  const X = p.X, curve = (c, from, to) => { const pts = [[from, 0]]; for (let i = 0; i <= 80; i++) { const x = from + (to - from) * i / 80; pts.push([x, ST.npdf(x - c)]); } pts.push([to, 0]); return pts; };
+  p.area(curve(shift, crit, X[1]), "a3");
+  if (two) p.area(curve(shift, X[0], -crit), "a3");
+  p.area(curve(0, crit, X[1]), "a2"); if (two) p.area(curve(0, X[0], -crit), "a2");
+  p.fn(x => ST.npdf(x), "c4"); p.fn(x => ST.npdf(x - shift), "c1");
+  p.seg(crit, 0, crit, 0.42, "guide"); p.text(crit, 0.42, "t* = " + EP.fmt(crit, 2), "sm", "middle", 0, -4);
+  if (two) p.seg(-crit, 0, -crit, 0.42, "guide");
+  p.text(0, 0.41, "H₀", "l4", shift > 0.3 && shift < 2.2 ? "end" : "middle", shift > 0.3 && shift < 2.2 ? -6 : 0, -2); if (shift > 0.3) p.text(shift, 0.41, "real effect", "l1", shift < 2.2 ? "start" : "middle", shift < 2.2 ? 6 : 0, -2);
+  if (last) { p.seg(last.t, 0, last.t, 0.2, "c6"); p.dot(last.t, 0.2, "", 5); p.text(last.t, 0.2, "your study", "sm", "middle", 0, -10); }
+  p.end();
+  const rows = [["Standard error of the difference", EP.fmt(se, 2) + " pts"], ["Critical value t*", EP.fmt(crit, 2)], ["Type I error (α)", EP.fmt(alpha * 100, 0) + "%"], ["Type II error (β)", EP.fmt((1 - power) * 100, 1) + "%"], ["Power (1 − β)", EP.fmt(power * 100, 1) + "%", power >= 0.8 ? "good" : power < 0.5 ? "bad" : ""]];
+  if (last) rows.push(["Your study: difference", (last.d >= 0 ? "+" : "−") + EP.fmt(Math.abs(last.d), 1) + " pts"], ["Your study: t, p", EP.fmt(last.t, 2) + ", p " + ST.fmtP(last.pv)], ["Decision", last.pv < alpha ? "Reject H₀" : "Keep H₀", last.pv < alpha ? "good" : ""]);
+  EP.readout(rows, v.eff === 0 ? `There is no real effect, so every rejection is a <b>false alarm</b>. They still happen ${EP.fmt(alpha * 100, 0)}% of the time — that is exactly what α means.`
+    : `If tutoring really adds ${EP.fmt(v.eff, 1)} points, a study with ${v.n} students per group detects it <b>${EP.fmt(power * 100, 0)}%</b> of the time. ` + (power < 0.8 ? "That's below the usual 80% target — you'd need more students." : "That's a well-powered study."));
+});
+</script>
+</body>
+</html>

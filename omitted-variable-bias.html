@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Omitted variable bias: correlation is not causation · Econ Playground</title>
+<meta name="description" content="See how leaving out a variable that drives both defence spending and growth biases a regression, and how controlling for it fixes the estimate.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 16 of 18</div>
+<h1>Omitted variable bias: correlation is not causation</h1>
+<p class="lede">A regression slope only measures a causal effect if nothing left out of the model drives both variables. Leave out such a variable and the estimate can be too big, too small, or even the wrong sign.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k2)"></i>High security threat</span><span class="key"><i class="" style="background:var(--k1)"></i>Low security threat</span><span class="key"><i class="" style="background:var(--k4)"></i>Simple regression (threat left out)</span><span class="key"><i class="" style="background:var(--k3)"></i>True effect</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>True effect of defence spending on growth</span><output for="beta" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="beta" min="-1" max="1" step="0.05" value="0"></label><label class="ctl"><span class="ctl-h"><span>Effect of the threat on growth</span><output for="gamma" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="gamma" min="-2" max="2" step="0.1" value="-1"></label><label class="ctl"><span class="ctl-h"><span>How strongly the threat raises defence spending</span><output for="rho" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="rho" min="0" max="0.95" step="0.05" value="0.7"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"beta": 0, "gamma": -1, "rho": 0.8}'>No real effect, strong confounder</button><button type="button" data-set='{"beta": 0.4, "gamma": -1.5, "rho": 0.8}'>Real positive effect hidden</button><button type="button" data-set='{"rho": 0}'>Threat unrelated to spending</button><button type="button" data-set='{"gamma": 0}'>Threat doesn't affect growth</button><button type="button" id="redraw">New sample</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>Say you regress economic growth on defence spending (% of GDP) across countries and find a negative slope. Does defence spending hurt growth? Not necessarily. Countries facing a bigger <strong>security threat</strong> spend more on defence <em>and</em> may grow more slowly because of the uncertainty — think of the Baltic states next to Russia. The threat is a <strong>confounder</strong>.</p>
+<p>If the threat is left out of the regression, the defence-spending coefficient picks up part of the threat's effect. This is <strong>omitted variable bias</strong>. Its size is the threat's effect on growth (γ) times how strongly the threat moves together with defence spending (δ): bias = γ · δ. Both must be non-zero for a bias to appear.</p>
+<p>The fix is to <strong>control</strong> for the confounder: add it to the regression (multiple regression), or use panel data with fixed effects to remove things that don't change over time (next topic). When the confounder can't be measured, economists look for natural experiments or instrumental variables.</p>
+<p>This is the central problem in the defence spending and growth literature: rich countries can afford more defence, threatened countries need more, and both of those also affect growth. A good term paper says which confounders it controls for and which it can't.</p>
+    <h2>Try this</h2>
+    <ol><li>Choose <b>No real effect, strong confounder</b>. Defence spending has zero true effect, yet the simple regression finds a clearly negative slope.</li><li>Choose <b>Real positive effect hidden</b>. The true effect is positive, but leaving out the threat makes it look negative — the sign flips.</li><li>Set the threat's effect on growth to 0, or its link to spending to 0. The bias disappears: you need both.</li><li>Compare the purple line (threat left out) with the green line (true effect) in the graph, and the two estimates in the panel.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Adding every variable you can find. Controls should be confounders (things that cause both x and y), not consequences of x — controlling for those can create new bias.</li><li>Thinking a high R² proves causality. A regression can fit well and still be badly biased.</li><li>Believing a non-significant result rules out an effect when an omitted variable could be pushing the estimate towards zero.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">y = β·x + γ·z + u</p><p class="fnote">True model: z is the confounder</p><p class="formula">b̂(short) ≈ β + γ·δ</p><p class="fnote">Simple regression of y on x leaves out z</p><p class="formula">δ = cov(x, z) / var(x)</p><p class="fnote">How z moves with x</p><p class="formula">Bias = γ · δ</p><p class="fnote">Zero if z doesn't affect y or isn't related to x</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Omitted variable bias</dt><dd lang="lv">Izlaista mainīgā novirze</dd><dt>Confounder</dt><dd lang="lv">Traucējošais (jaucošais) faktors</dd><dt>Control variable</dt><dd lang="lv">Kontroles mainīgais</dd><dt>Causal effect</dt><dd lang="lv">Cēloņsakarības efekts</dd><dt>Endogeneity</dt><dd lang="lv">Endogenitāte</dd><dt>Multiple regression</dt><dd lang="lv">Daudzfaktoru regresija</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://www.cengage.com/c/introductory-econometrics-a-modern-approach-7e-wooldridge/" target="_blank" rel="noopener">Wooldridge — Introductory Econometrics</a><span>Section 3.3: omitted variable bias</span></li><li><a href="https://eprints.bbk.ac.uk/id/eprint/28043" target="_blank" rel="noopener">Dunne & Smith (2020), Military expenditure, investment and growth</a><span>Why the data can't easily identify the effect</span></li><li><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener">Khan Academy — Statistics and probability</a><span>Correlation and causality</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="regression.html"><span>← Previous</span><b>Correlation and least-squares regression</b></a><a class="next" href="fixed-effects.html"><span>Next →</span><b>Panel data and fixed effects</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 6], y: [-4, 8], h: 440, xLabel: "Defence spending (% of GDP)", yLabel: "GDP growth (%)", title: "Growth against defence spending, coloured by threat" });
+let seed = 5; document.getElementById("redraw").addEventListener("click", () => { seed++; ctl.update(); });
+const ctl = EP.controls(["beta", "gamma", "rho"], v => {
+  const r = ST.rng(seed), N = 150, xs = [], ys = [], zs = [];
+  for (let i = 0; i < N; i++) { const z = ST.normal(r); const x = 2.4 + 0.9 * (v.rho * z + Math.sqrt(1 - v.rho * v.rho) * ST.normal(r)); const y = 2.5 + v.beta * (x - 2.4) + v.gamma * z + 0.8 * ST.normal(r); xs.push(x); ys.push(y); zs.push(z); }
+  const s = ST.ols(xs, ys), l = ST.ols2(xs, zs, ys), d = ST.ols(xs, zs).b;
+  p.begin().axes({ fy: y => y + "%", fx: x => x + "%" });
+  xs.forEach((x, i) => p.dot(x, ys[i], zs[i] > 0 ? "d2" : "d1", 3.6));
+  p.fn(x => s.a + s.b * x, "c4", 0.3, 5.7);
+  p.fn(x => ST.mean(ys) + v.beta * (x - ST.mean(xs)), "c3 dash", 0.3, 5.7);
+  p.text(5.7, s.a + s.b * 5.7, "slope " + EP.fmt(s.b, 2), "l4", "end", 0, -10);
+  p.end();
+  const bias = s.b - v.beta;
+  EP.readout([["True effect β", EP.fmt(v.beta, 2)], ["Simple regression (threat left out)", EP.fmt(s.b, 2), Math.abs(bias) > 0.15 ? "bad" : "good"], ["Controlling for the threat", EP.fmt(l.b1, 2), "good"], ["Bias in the simple regression", (bias >= 0 ? "+" : "−") + EP.fmt(Math.abs(bias), 2)], ["Predicted bias γ·δ", EP.fmt(v.gamma * d, 2)], ["p-value of the simple slope", ST.fmtP(s.p)]],
+    Math.abs(bias) < 0.15 ? "Here the simple regression gets close to the true effect, because the threat either doesn't affect growth or isn't linked to defence spending."
+    : `Leaving out the threat makes defence spending look <b>${s.b < v.beta ? "worse" : "better"}</b> for growth than it is: the estimate is ${EP.fmt(s.b, 2)} instead of ${EP.fmt(v.beta, 2)}. ` + (Math.sign(s.b) !== Math.sign(v.beta) && Math.abs(v.beta) > 0.05 ? "It even has the <b>wrong sign</b>. " : "") + "Adding the threat as a control removes the bias.");
+});
+</script>
+</body>
+</html>

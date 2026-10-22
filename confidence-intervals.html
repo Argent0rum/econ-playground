@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Samples and confidence intervals · Econ Playground</title>
+<meta name="description" content="Draw samples from a population and see why about 95% of 95% confidence intervals catch the true mean.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 13 of 18</div>
+<h1>Samples and confidence intervals</h1>
+<p class="lede">We almost never see a whole population, only a sample. A confidence interval turns one sample into a range that, over many samples, catches the true value as often as promised.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Interval that catches the true mean</span><span class="key"><i class="" style="background:var(--k2)"></i>Interval that misses it</span><span class="key"><i class="" style="background:var(--k3)"></i>True mean μ</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Sample size (n)</span><output for="n" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="n" min="3" max="200" step="1" value="20"></label><label class="ctl"><span class="ctl-h"><span>Confidence level</span><output for="cl" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="cl" min="80" max="99" step="1" value="95"></label><label class="ctl"><span class="ctl-h"><span>Spread in the population σ (€)</span><output for="sig" data-fmt="int" data-pre="€" data-post=""></output></span><input type="range" id="sig" min="10" max="120" step="5" value="60"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"n": 4}'>Tiny samples</button><button type="button" data-set='{"n": 200}'>Big samples</button><button type="button" data-set='{"cl": 99}'>99% confidence</button><button type="button" data-set='{"sig": 120}'>Very spread out</button><button type="button" id="redraw">Draw 40 new samples</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>Imagine you want the <strong>average monthly grocery spending</strong> of all students in Latvia. You can't ask everyone, so you ask a random <strong>sample</strong> of n students and compute their average. A different sample would give a different average — that variation is what statistics measures.</p>
+<p>The spread of sample averages is the <strong>standard error</strong>, σ/√n. It shrinks with the square root of the sample size: four times as many people only halves the error. A <strong>confidence interval</strong> is the sample mean plus or minus a few standard errors: x̄ ± t* · s/√n.</p>
+<p>The “95%” is a promise about the <em>method</em>, not about one interval. If you repeated the survey many times, about 95 out of 100 intervals would contain the true mean μ. Any single interval either contains μ or it doesn't — you just don't know which. The graph shows 40 surveys at once, so you can count the misses.</p>
+<p>Higher confidence costs width: a 99% interval is wider than a 90% one. Bigger samples buy narrower intervals at the same confidence. With small samples we use the t distribution instead of the normal one, because the sample standard deviation s is itself uncertain.</p>
+    <h2>Try this</h2>
+    <ol><li>Press <b>Draw 40 new samples</b> a few times. At 95% confidence you'll usually see about 2 red intervals out of 40.</li><li>Set n to 4. The intervals get much wider (and jumpy), but the share that misses stays about the same.</li><li>Raise the confidence level to 99%. The misses almost disappear — but every interval gets wider.</li><li>Move n from 20 to 80. The intervals become about half as wide: the √n rule.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Saying “there is a 95% chance μ is in this interval”. After you've drawn the sample, μ is either in it or not; the 95% describes how often the method works.</li><li>Forgetting the square root. Doubling the sample does not halve the margin of error — you need four times the sample.</li><li>Using the normal value 1.96 with a tiny sample. With n under about 30, use the t value with n − 1 degrees of freedom.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">SE = σ / √n</p><p class="fnote">Standard error of the mean</p><p class="formula">x̄ ± t* · s / √n</p><p class="fnote">Confidence interval, t* with n − 1 degrees of freedom</p><p class="formula">ME = t* · s / √n</p><p class="fnote">Margin of error</p><p class="formula">n ≈ (z* · σ / ME)²</p><p class="fnote">Sample size needed for a target margin of error</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Population</dt><dd lang="lv">Ģenerālkopa</dd><dt>Sample</dt><dd lang="lv">Izlase</dd><dt>Sample mean</dt><dd lang="lv">Izlases vidējais</dd><dt>Standard error</dt><dd lang="lv">Standartkļūda</dd><dt>Confidence interval</dt><dd lang="lv">Ticamības intervāls</dd><dt>Confidence level</dt><dd lang="lv">Ticamības līmenis</dd><dt>Margin of error</dt><dd lang="lv">Kļūdas robeža</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Statistics 2e</a><span>Chapter “Confidence Intervals”</span></li><li><a href="https://seeing-theory.brown.edu/" target="_blank" rel="noopener">Seeing Theory (Brown University)</a><span>“Frequentist inference” animation</span></li><li><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener">Khan Academy — Statistics and probability</a><span>Unit on confidence intervals</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="interest-inflation.html"><span>← Previous</span><b>Compound interest, inflation and real value</b></a><a class="next" href="hypothesis-testing.html"><span>Next →</span><b>Hypothesis tests, p-values and power</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const p = EP.plot("fig", { x: [60, 300], y: [0, 41], h: 470, m: { l: 62, r: 20, t: 12, b: 46 }, xLabel: "Average monthly grocery spending (€)", yLabel: "Sample number", title: "40 confidence intervals" });
+const MU = 180, K = 40; let seed = 11;
+document.getElementById("redraw").addEventListener("click", () => { seed++; ctl.update(); });
+const ctl = EP.controls(["n", "cl", "sig"], v => {
+  const r = ST.rng(seed), n = v.n, lvl = v.cl / 100, tstar = ST.tinv(1 - (1 - lvl) / 2, n - 1);
+  let miss = 0, wsum = 0; const rows = [];
+  for (let k = 0; k < K; k++) {
+    const xs = []; for (let i = 0; i < n; i++) xs.push(MU + v.sig * ST.normal(r));
+    const m = ST.mean(xs), s = ST.sd(xs), me = tstar * s / Math.sqrt(n);
+    const hit = m - me <= MU && MU <= m + me; if (!hit) miss++; wsum += me; rows.push([m, me, hit]);
+  }
+  p.begin().axes({ stepY: 10 });
+  p.seg(MU, 0, MU, 41, "c3 thin");
+  rows.forEach(([m, me, hit], k) => { const y = k + 1; p.seg(m - me, y, m + me, y, hit ? "c1 thin" : "c2"); p.dot(m, y, hit ? "" : "hollow", 2.6); });
+  p.text(MU, 40.6, "μ = €" + MU, "l3", "middle", 0, -2);
+  p.end();
+  const exp = K * (1 - lvl);
+  EP.readout([["Sample size", EP.fmt(n, 0)], ["t* used", EP.fmt(tstar, 3)], ["Standard error σ/√n", "€" + EP.fmt(v.sig / Math.sqrt(n), 1)], ["Average margin of error", "±€" + EP.fmt(wsum / K, 1)], ["Intervals that miss μ", miss + " of " + K, miss > exp + 3 ? "bad" : ""], ["Expected misses", "about " + EP.fmt(exp, 1)]],
+    `Each line is one survey of <b>${n}</b> students. At ${v.cl}% confidence the method should miss the true mean about ${EP.fmt(exp, 1)} times in 40 — this draw missed <b>${miss}</b>. ` + (n < 10 ? "With so few people the intervals are wide and very uneven, because s itself is uncertain." : "Bigger samples would make every interval narrower without changing the miss rate."));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Price indices and real values · Econ Playground</title>
+<meta name="description" content="Build Laspeyres, Paasche and Fisher price indices from a small basket, and turn a nominal wage rise into a real one.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 18 of 18</div>
+<h1>Price indices and real values</h1>
+<p class="lede">A price index sums up how the cost of a basket of goods changed. Which basket you use — this year's or the base year's — changes the answer, and so does your real wage.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="sq" style="background:var(--k1)"></i>Laspeyres (base-year basket)</span><span class="key"><i class="sq" style="background:var(--k2)"></i>Paasche (current basket)</span><span class="key"><i class="sq" style="background:var(--k4)"></i>Fisher (geometric mean)</span><span class="key"><i class="sq" style="background:var(--k3)"></i>Nominal wage</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Bread price change</span><output for="pb" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="pb" min="-30" max="100" step="1" value="12"></label><label class="ctl"><span class="ctl-h"><span>Fuel price change</span><output for="pf" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="pf" min="-30" max="100" step="1" value="45"></label><label class="ctl"><span class="ctl-h"><span>Electricity price change</span><output for="pe" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="pe" min="-30" max="150" step="1" value="80"></label><label class="ctl"><span class="ctl-h"><span>Fuel: change in quantity bought</span><output for="qf" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="qf" min="-60" max="30" step="1" value="-20"></label><label class="ctl"><span class="ctl-h"><span>Electricity: change in quantity bought</span><output for="qe" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="qe" min="-60" max="30" step="1" value="-25"></label><label class="ctl"><span class="ctl-h"><span>Nominal wage change</span><output for="w" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="w" min="-10" max="60" step="1" value="20"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"pf": 60, "pe": 120, "qf": -25, "qe": -30, "pb": 15}'>Energy shock</button><button type="button" data-set='{"pb": 10, "pf": 10, "pe": 10, "qf": 0, "qe": 0}'>Everything +10%</button><button type="button" data-set='{"qf": 0, "qe": 0}'>No substitution</button><button type="button" data-set='{"pf": -20, "qf": 15, "pe": 5, "qe": 0}'>Fuel gets cheaper</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A <strong>price index</strong> compares what a basket of goods costs now with what it cost in a <strong>base year</strong> (index = 100). Our basket has three goods a student household buys every month: bread, fuel and electricity, with base-year prices €1.40, €1.60 per litre and €0.18 per kWh.</p>
+<p>The <strong>Laspeyres index</strong> keeps the base-year quantities: “what would last year's shopping cost today?” The <strong>Paasche index</strong> uses current quantities: “what would today's shopping have cost last year?” When a price shoots up, people buy less of it, so Laspeyres overstates the rise in the cost of living (it ignores substitution) and Paasche understates it. The <strong>Fisher index</strong>, the geometric mean of the two, sits in between.</p>
+<p>Official consumer price indices (like the CSP's patēriņa cenu indekss) are Laspeyres-type indices whose weights are updated regularly. The <strong>real wage</strong> is the nominal wage divided by the price index: if wages rise 20% and prices 25%, workers can buy less than before.</p>
+<p>The same logic gives real GDP, real interest rates and real defence spending (nominal spending divided by a deflator) — anything you compare across years should be in real terms.</p>
+    <h2>Try this</h2>
+    <ol><li>Choose <b>Energy shock</b>. Laspeyres rises the most, Paasche the least, and the real wage falls even though the nominal wage rises.</li><li>Choose <b>Everything +10%</b>. With equal price rises and no change in quantities, all three indices agree.</li><li>Choose <b>No substitution</b>. If people don't change what they buy, Laspeyres and Paasche become equal.</li><li>Set the nominal wage change equal to the Fisher index rise. The real wage stays the same.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Subtracting percentages instead of dividing: real change = (1 + wage growth) / (1 + inflation) − 1. Subtraction is only a rough shortcut for small numbers.</li><li>Mixing up which quantities each index uses. Laspeyres → base year (L for “last”), Paasche → current year.</li><li>Comparing nominal values across years. Always deflate first.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">L = Σ p₁q₀ / Σ p₀q₀ × 100</p><p class="fnote">Laspeyres price index</p><p class="formula">P = Σ p₁q₁ / Σ p₀q₁ × 100</p><p class="fnote">Paasche price index</p><p class="formula">F = √(L × P)</p><p class="fnote">Fisher ideal index</p><p class="formula">Real wage index = W₁/W₀ ÷ (index/100)</p><p class="fnote">Deflating a nominal value</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Price index</dt><dd lang="lv">Cenu indekss</dd><dt>Base year</dt><dd lang="lv">Bāzes gads</dd><dt>Laspeyres index</dt><dd lang="lv">Laspeiresa indekss</dd><dt>Paasche index</dt><dd lang="lv">Pāšes indekss</dd><dt>Consumer price index</dt><dd lang="lv">Patēriņa cenu indekss</dd><dt>Real wage</dt><dd lang="lv">Reālā darba samaksa</dd><dt>Deflator</dt><dd lang="lv">Deflators</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://stat.gov.lv/lv/statistikas-temas/cenas/paterina-cenas" target="_blank" rel="noopener">CSP — Patēriņa cenu indekss</a><span>How Latvia's CPI is built</span></li><li><a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Statistics 2e</a><span>Background on descriptive statistics</span></li><li><a href="https://openstax.org/books/principles-economics-3e/pages/preface" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>Chapter “Inflation”</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="fixed-effects.html"><span>← Previous</span><b>Panel data and fixed effects</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const BASE = [{ n: "Bread", p: 1.40, q: 25 }, { n: "Fuel", p: 1.60, q: 40 }, { n: "Electricity", p: 0.18, q: 180 }];
+const p = EP.plot("fig", { x: [0, 4], y: [80, 200], h: 400, m: { l: 58, r: 20, t: 16, b: 40 }, xLabel: "", yLabel: "Index (base year = 100)", title: "Price indices and nominal wage" });
+EP.controls(["pb", "pf", "pe", "qf", "qe", "w"], v => {
+  const dp = [v.pb, v.pf, v.pe].map(x => 1 + x / 100), dq = [0, v.qf, v.qe].map(x => 1 + x / 100);
+  let a = 0, b = 0, c = 0, d = 0;
+  BASE.forEach((g, i) => { const p1 = g.p * dp[i], q1 = g.q * dq[i]; a += p1 * g.q; b += g.p * g.q; c += p1 * q1; d += g.p * q1; });
+  const L = a / b * 100, P = c / d * 100, F = Math.sqrt(L * P), W = 100 + v.w;
+  const vals = [["Laspeyres", L, "barf"], ["Paasche", P, "barf b2"], ["Fisher", F, "barf b4"], ["Wage", W, "barf b3"]];
+  const top = Math.max(140, ...vals.map(x => x[1])) * 1.08, bot = Math.min(80, ...vals.map(x => x[1])) - 5;
+  p.setDomain(null, [Math.floor(bot / 10) * 10, Math.ceil(top / 10) * 10]);
+  p.begin().axes({ fx: () => "" });
+  p.seg(0, 100, 4, 100, "cg");
+  vals.forEach(([n, val, cls], i) => { const x1 = p.sx(i + 0.18), x2 = p.sx(i + 0.82), y1 = p.sy(Math.max(100, val)), y2 = p.sy(Math.min(100, val)); p.raw(`<rect class="${cls}" x="${x1.toFixed(1)}" y="${y1.toFixed(1)}" width="${(x2 - x1).toFixed(1)}" height="${Math.max(1, y2 - y1).toFixed(1)}" rx="3"/>`); p.text(i + 0.5, val, EP.fmt(val, 1), "", "middle", 0, val >= 100 ? -8 : 16); p.text(i + 0.5, p.Y[0], n, "sm", "middle", 0, 18); });
+  p.end();
+  const real = (r) => (W / r - 1) * 100;
+  EP.readout([["Laspeyres index", EP.fmt(L, 1)], ["Paasche index", EP.fmt(P, 1)], ["Fisher index", EP.fmt(F, 1)], ["Nominal wage index", EP.fmt(W, 1)], ["Real wage change (Laspeyres)", (real(L) >= 0 ? "+" : "−") + EP.fmt(Math.abs(real(L)), 1) + "%", real(L) >= 0 ? "good" : "bad"], ["Real wage change (Fisher)", (real(F) >= 0 ? "+" : "−") + EP.fmt(Math.abs(real(F)), 1) + "%", real(F) >= 0 ? "good" : "bad"]],
+    `The base-year basket now costs <b>${EP.fmt(L - 100, 1)}%</b> more (Laspeyres); today's basket costs ${EP.fmt(P - 100, 1)}% more than it would have at base-year prices (Paasche). ` + (Math.abs(L - P) > 0.5 ? "The gap is the substitution effect: people bought less of what got expensive. " : "") + (real(F) < 0 ? `A ${v.w}% pay rise is <b>not enough</b> — the real wage falls.` : `With a ${v.w}% pay rise the real wage still grows.`));
+});
+</script>
+</body>
+</html>

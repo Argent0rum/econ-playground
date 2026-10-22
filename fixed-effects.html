@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel data and fixed effects · Econ Playground</title>
+<meta name="description" content="Compare a pooled regression with a fixed-effects regression on panel data for five countries, and see why within-country variation matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 17 of 18</div>
+<h1>Panel data and fixed effects</h1>
+<p class="lede">Panel data follow the same countries over many years. Fixed effects compare each country with itself, which removes everything about a country that doesn't change over time.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k4)"></i>Pooled regression (all points)</span><span class="key"><i class="" style="background:var(--k1)"></i>Fixed effects: one line per country, shared slope</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>True within-country effect</span><output for="beta" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="beta" min="-1" max="1" step="0.05" value="-0.2"></label><label class="ctl"><span class="ctl-h"><span>How different the countries' growth levels are</span><output for="spread" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="spread" min="0" max="4" step="0.1" value="2.5"></label><label class="ctl"><span class="ctl-h"><span>Link between a country's level and its usual spending</span><output for="link" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="link" min="-1" max="1" step="0.05" value="0.8"></label><label class="ctl"><span class="ctl-h"><span>Years per country</span><output for="years" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="years" min="4" max="30" step="1" value="15"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"spread": 3.5, "link": 0.9}'>Countries differ a lot</button><button type="button" data-set='{"beta": -0.4, "spread": 3, "link": 0.9}'>Opposite signs</button><button type="button" data-set='{"spread": 0}'>No country differences</button><button type="button" data-set='{"link": 0}'>Level unrelated to spending</button><button type="button" id="redraw">New sample</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>Most studies of defence spending and growth use a <strong>panel</strong>: many countries, each observed for many years (like the EU15 data in Dunne &amp; Nikolaidou or Kollias et al.). Countries differ in ways that are hard to measure — institutions, geography, history — and those differences can be linked to both spending and growth.</p>
+<p>A <strong>pooled regression</strong> throws all country-years into one cloud and fits one line. It mixes two things: differences <em>between</em> countries and changes <em>within</em> each country. If countries with a high growth level also tend to spend more (or less), the pooled slope picks that up, even if spending has no effect at all.</p>
+<p><strong>Fixed effects</strong> give every country its own intercept, so only within-country changes identify the slope: “when Latvia spends more than its own average, does Latvia grow faster than its own average?” In practice you subtract each country's mean from its observations (the within transformation) and run OLS on what's left. Everything constant over time drops out.</p>
+<p>The price: fixed effects can't estimate anything that never changes (like geography), and they rely on within-country variation, which can be small. Time-varying confounders — a sudden security shock — still cause bias, so many studies add year effects too.</p>
+    <h2>Try this</h2>
+    <ol><li>Choose <b>Countries differ a lot</b>. The pooled line is steep and positive, but within each country the effect is slightly negative.</li><li>Choose <b>Opposite signs</b>. Pooled and fixed-effects estimates point in opposite directions — which one answers your research question?</li><li>Set the country differences to 0. Pooled and fixed-effects slopes become almost the same.</li><li>Set the link to 0. Country differences add noise to the pooled regression but no longer bias it.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Running a pooled regression on panel data and calling the slope causal without discussing country differences.</li><li>Using fixed effects with a variable that barely changes within countries — the estimate becomes very imprecise.</li><li>Forgetting time effects: if all countries are hit by the same shock in one year (a crisis, a war), add year dummies.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">yᵢₜ = αᵢ + β·xᵢₜ + uᵢₜ</p><p class="fnote">Fixed-effects model: αᵢ is the country effect</p><p class="formula">ÿᵢₜ = yᵢₜ − ȳᵢ</p><p class="fnote">Within transformation (subtract the country mean)</p><p class="formula">β̂(FE) = Σẍÿ / Σẍ²</p><p class="fnote">OLS on demeaned data</p><p class="formula">yᵢₜ = α + β·xᵢₜ + eᵢₜ</p><p class="fnote">Pooled model (one intercept)</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Panel data</dt><dd lang="lv">Paneļa dati</dd><dt>Fixed effects</dt><dd lang="lv">Fiksētie efekti</dd><dt>Pooled regression</dt><dd lang="lv">Apvienotā (pooled) regresija</dd><dt>Within transformation</dt><dd lang="lv">Iekšējā transformācija</dd><dt>Unobserved heterogeneity</dt><dd lang="lv">Nenovērotā heterogenitāte</dd><dt>Time effects</dt><dd lang="lv">Laika efekti</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://www.cengage.com/c/introductory-econometrics-a-modern-approach-7e-wooldridge/" target="_blank" rel="noopener">Wooldridge — Introductory Econometrics</a><span>Chapters 13–14: panel data</span></li><li><a href="https://ideas.repec.org/p/uwe/wpaper/1102.html" target="_blank" rel="noopener">Dunne & Nikolaidou (2012), Defence spending and economic growth in the EU15</a><span>A panel study you can compare with</span></li><li><a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Statistics 2e</a><span>Background on regression</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="omitted-variable-bias.html"><span>← Previous</span><b>Omitted variable bias: correlation is not causation</b></a><a class="next" href="index-numbers.html"><span>Next →</span><b>Price indices and real values</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const NAMES = ["Country A", "Country B", "Country C", "Country D", "Country E"];
+const p = EP.plot("fig", { x: [0, 6], y: [-4, 10], h: 440, xLabel: "Defence spending (% of GDP)", yLabel: "GDP growth (%)", title: "Panel of five countries" });
+let seed = 9; document.getElementById("redraw").addEventListener("click", () => { seed++; ctl.update(); });
+const ctl = EP.controls(["beta", "spread", "link", "years"], v => {
+  const r = ST.rng(seed), C = 5, X = [], Y = [], G = [];
+  for (let c = 0; c < C; c++) {
+    const u = (c - 2) / 2;                       // country position −1 … 1
+    const alpha = 3 + v.spread * u;              // country growth level
+    const xbar = 2.5 + 1.4 * (v.link * u + Math.sqrt(1 - v.link * v.link) * ST.normal(r) * 0.6);
+    for (let t = 0; t < v.years; t++) { const x = xbar + 0.45 * ST.normal(r); X.push(x); Y.push(alpha + v.beta * (x - 2.5) + 0.6 * ST.normal(r)); G.push(c); }
+  }
+  const pooled = ST.ols(X, Y);
+  const mx = [], my = []; for (let c = 0; c < C; c++) { const ix = G.map((g, i) => g === c ? i : -1).filter(i => i >= 0); mx.push(ST.mean(ix.map(i => X[i]))); my.push(ST.mean(ix.map(i => Y[i]))); }
+  let sxy = 0, sxx = 0; X.forEach((x, i) => { const dx = x - mx[G[i]], dy = Y[i] - my[G[i]]; sxy += dx * dy; sxx += dx * dx; });
+  const bfe = sxy / sxx; let sse = 0; X.forEach((x, i) => { const e = (Y[i] - my[G[i]]) - bfe * (x - mx[G[i]]); sse += e * e; });
+  const seFe = Math.sqrt(sse / (X.length - C - 1) / sxx), tFe = bfe / seFe, pFe = 2 * (1 - ST.tcdf(Math.abs(tFe), X.length - C - 1));
+  p.begin().axes({ fy: y => y + "%", fx: x => x + "%" });
+  X.forEach((x, i) => p.dot(x, Y[i], "d" + (G[i] + 1), 3.4));
+  for (let c = 0; c < C; c++) p.fn(x => my[c] + bfe * (x - mx[c]), "c" + (c + 1) + " thin", mx[c] - 1.1, mx[c] + 1.1);
+  p.fn(x => pooled.a + pooled.b * x, "c4", 0.2, 5.8);
+  p.text(5.8, pooled.a + pooled.b * 5.8, "pooled " + EP.fmt(pooled.b, 2), "l4", "end", 0, -10);
+  p.end();
+  const differ = Math.sign(pooled.b) !== Math.sign(bfe) && Math.abs(pooled.b - bfe) > 0.2;
+  EP.readout([["True within effect β", EP.fmt(v.beta, 2)], ["Pooled slope", EP.fmt(pooled.b, 2), Math.abs(pooled.b - v.beta) > 0.25 ? "bad" : ""], ["Fixed-effects slope", EP.fmt(bfe, 2), "good"], ["FE standard error", EP.fmt(seFe, 3)], ["FE p-value", ST.fmtP(pFe)], ["Observations", X.length + " (" + C + " × " + v.years + ")"]],
+    differ ? `The pooled line says more defence spending goes with <b>${pooled.b > 0 ? "higher" : "lower"}</b> growth, but within each country the relationship is <b>${bfe > 0 ? "positive" : "negative"}</b>. The pooled slope is driven by differences <em>between</em> countries.`
+    : Math.abs(pooled.b - bfe) > 0.25 ? "The pooled slope is pulled away from the true within-country effect by differences between countries. Fixed effects remove them." : "Pooled and fixed-effects slopes agree here, because country levels aren't linked to how much they spend.");
+});
+</script>
+</body>
+</html>
