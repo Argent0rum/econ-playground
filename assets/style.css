@@ -170,7 +170,7 @@ footer { border-top: 1px solid var(--line); font-family: var(--font-ui); font-si
 footer .site-in { padding-block: 18px; }
 
 @media (max-width: 900px) {
-  .lab, .reading { grid-template-columns: 1fr; }
+  .lab, .reading { grid-template-columns: minmax(0, 1fr); }
   .side { position: static; }
 }
 @media (max-width: 520px) {
@@ -179,3 +179,10 @@ footer .site-in { padding-block: 18px; }
   .tk { font-size: 13px; } .al { font-size: 14px; } .lb { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+
+/* statistics topics: coloured data points and extra bar colours */
+.pt.d1 { fill: var(--k1); } .pt.d2 { fill: var(--k2); } .pt.d3 { fill: var(--k3); } .pt.d4 { fill: var(--k4); } .pt.d5 { fill: var(--k5); } .pt.d6 { fill: var(--k6); }
+.pt.d1, .pt.d2, .pt.d3, .pt.d4, .pt.d5, .pt.d6 { stroke-width: 1; opacity: .85; }
+.barf.b3 { fill: var(--k3); } .barf.b4 { fill: var(--k4); }
+.lb.l4 { fill: var(--k4); }
+.terms dt, .terms dd { overflow-wrap: anywhere; }

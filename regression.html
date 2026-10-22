@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Correlation and least-squares regression · Econ Playground</title>
+<meta name="description" content="Fit a regression line to consumption and income data, estimate the marginal propensity to consume, and read the slope, standard error, t, p and R².">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 15 of 18</div>
+<h1>Correlation and least-squares regression</h1>
+<p class="lede">Regression draws the line that best fits a cloud of points and tells you how sure you can be about its slope. Here it estimates how much of each extra euro of income households spend.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="" style="background:var(--k1)"></i>Fitted (least-squares) line</span><span class="key"><i class="" style="background:var(--k4)"></i>True line</span><span class="key"><i class="" style="background:var(--k2)"></i>Residuals</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>True marginal propensity to consume</span><output for="b" data-fmt="dec2" data-pre="" data-post=""></output></span><input type="range" id="b" min="0.1" max="1" step="0.05" value="0.7"></label><label class="ctl"><span class="ctl-h"><span>Noise (other reasons people spend)</span><output for="noise" data-fmt="int" data-pre="€" data-post=""></output></span><input type="range" id="noise" min="5" max="300" step="5" value="150"></label><label class="ctl"><span class="ctl-h"><span>Number of households (n)</span><output for="n" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="n" min="8" max="200" step="1" value="40"></label><label class="ctl check"><input type="checkbox" id="res" checked>Show residuals</label><label class="ctl check"><input type="checkbox" id="out">Add one outlier</label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"noise": 15, "n": 60}'>Clean data</button><button type="button" data-set='{"noise": 180, "n": 12}'>Noisy, small sample</button><button type="button" data-set='{"b": 0.15, "noise": 120}'>Weak relationship</button><button type="button" data-set='{"out": true, "n": 15, "noise": 40}'>With an outlier</button><button type="button" id="redraw">New sample</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>Each dot is a household: monthly disposable income on the x-axis, consumption on the y-axis. Theory (the Keynesian consumption function, C = a + b·Y) says the slope b — the <strong>marginal propensity to consume</strong> — is between 0 and 1. Regression estimates it from data.</p>
+<p><strong>Ordinary least squares</strong> picks the line that makes the sum of squared <strong>residuals</strong> (the vertical gaps between dots and the line) as small as possible. The slope estimate b̂ always comes with a <strong>standard error</strong>: how much b̂ would bounce around if you drew another sample. Divide b̂ by its standard error and you get a t statistic; its p-value tests whether the true slope could be zero.</p>
+<p><strong>R²</strong> is the share of the variation in consumption that the line explains. A low R² does not mean the slope is wrong — consumption simply depends on many other things. The <strong>correlation coefficient r</strong> measures how tightly the dots follow a straight line (r² = R² in simple regression).</p>
+<p>Least squares cares a lot about big errors, because they are squared. One unusual point far from the rest — an <strong>outlier</strong> with high leverage — can tilt the whole line.</p>
+    <h2>Try this</h2>
+    <ol><li>Press <b>New sample</b> several times. The blue fitted line moves around the purple true line — that wobble is what the standard error measures.</li><li>Choose <b>Noisy, small sample</b>. The slope's confidence interval becomes very wide, and sometimes it isn't significant at all.</li><li>Choose <b>Weak relationship</b>. R² is low, but with enough data the slope can still be clearly different from zero.</li><li>Tick <b>Add one outlier</b> with a small sample and watch one point drag the line.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Thinking a low R² makes a regression useless. The slope can be estimated precisely even when income explains only a small part of spending.</li><li>Reading the slope as causal. Regression shows how y moves with x in the data; whether x causes y needs a design that rules out other explanations (see the next topic).</li><li>Extrapolating far outside the data. The line is only checked where you have observations.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">b̂ = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²</p><p class="fnote">Least-squares slope</p><p class="formula">â = ȳ − b̂ · x̄</p><p class="fnote">Intercept</p><p class="formula">SE(b̂) = s / √Σ(x − x̄)²</p><p class="fnote">Standard error of the slope, s² = Σe² / (n − 2)</p><p class="formula">t = b̂ / SE(b̂)</p><p class="fnote">Test of H₀: b = 0, n − 2 degrees of freedom</p><p class="formula">R² = 1 − Σe² / Σ(y − ȳ)²</p><p class="fnote">Share of variation explained</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Regression</dt><dd lang="lv">Regresija</dd><dt>Least squares method</dt><dd lang="lv">Mazāko kvadrātu metode</dd><dt>Slope coefficient</dt><dd lang="lv">Regresijas koeficients</dd><dt>Residual</dt><dd lang="lv">Atlikums</dd><dt>Coefficient of determination</dt><dd lang="lv">Determinācijas koeficients</dd><dt>Correlation coefficient</dt><dd lang="lv">Korelācijas koeficients</dd><dt>Outlier</dt><dd lang="lv">Izlēcējs (netipisks novērojums)</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Statistics 2e</a><span>Chapter “Linear Regression and Correlation”</span></li><li><a href="https://seeing-theory.brown.edu/" target="_blank" rel="noopener">Seeing Theory (Brown University)</a><span>Chapter “Regression analysis”</span></li><li><a href="https://www.cengage.com/c/introductory-econometrics-a-modern-approach-7e-wooldridge/" target="_blank" rel="noopener">Wooldridge — Introductory Econometrics</a><span>Chapter 2: the simple regression model</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="hypothesis-testing.html"><span>← Previous</span><b>Hypothesis tests, p-values and power</b></a><a class="next" href="omitted-variable-bias.html"><span>Next →</span><b>Omitted variable bias: correlation is not causation</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const p = EP.plot("fig", { x: [400, 2600], y: [0, 2400], h: 440, xLabel: "Disposable income (€ per month)", yLabel: "Consumption (€ per month)", title: "Household consumption against income" });
+let seed = 21; document.getElementById("redraw").addEventListener("click", () => { seed++; ctl.update(); });
+const ctl = EP.controls(["b", "noise", "n", "res", "out"], v => {
+  const r = ST.rng(seed), A = 250, xs = [], ys = [];
+  for (let i = 0; i < v.n; i++) { const x = 500 + 2000 * r(); xs.push(x); ys.push(A + v.b * x + v.noise * ST.normal(r)); }
+  if (v.out) { xs.push(2500); ys.push(350); }
+  const o = ST.ols(xs, ys), tq = ST.tinv(0.975, o.df);
+  p.begin().axes({ fx: x => "€" + x, fy: y => "€" + y });
+  p.fn(x => A + v.b * x, "c4 dash thin", 400, 2600);
+  if (v.res) xs.forEach((x, i) => p.seg(x, ys[i], x, o.a + o.b * x, "c2 thin"));
+  xs.forEach((x, i) => p.dot(x, ys[i], v.out && i === xs.length - 1 ? "hollow" : "", v.n > 100 ? 3 : 4));
+  p.fn(x => o.a + o.b * x, "c1", 400, 2600);
+  p.text(2580, o.a + o.b * 2580, "ŷ = " + EP.fmt(o.a, 0) + " + " + EP.fmt(o.b, 2) + "·x", "l1", "end", 0, -10);
+  p.end();
+  const lo = o.b - tq * o.seB, hi = o.b + tq * o.seB, sig = o.p < 0.05;
+  EP.readout([["Estimated MPC (slope)", EP.fmt(o.b, 3)], ["Standard error", EP.fmt(o.seB, 3)], ["95% confidence interval", EP.fmt(lo, 2) + " to " + EP.fmt(hi, 2), lo <= v.b && v.b <= hi ? "good" : "bad"], ["t statistic", EP.fmt(o.t, 2)], ["p-value (H₀: slope = 0)", ST.fmtP(o.p), sig ? "good" : ""], ["R²", EP.fmt(o.r2, 2)], ["Correlation r", EP.fmt(o.r, 2)], ["Intercept", "€" + EP.fmt(o.a, 0)]],
+    `From these ${o.n} households, each extra €1 of income goes with about <b>€${EP.fmt(o.b, 2)}</b> of extra spending (true value ${EP.fmt(v.b, 2)}). ` + (sig ? "The slope is clearly different from zero." : "With this much noise and so few households, we can't even rule out a slope of zero.") + (v.out ? " The hollow point is the outlier — compare the slope with and without it." : ""));
+});
+</script>
+</body>
+</html>

@@ -23,6 +23,15 @@ Interactive economics explainers. Every topic is built around a graph you can ch
 11. IS–LM: fiscal and monetary policy
 12. Compound interest, inflation and real value
 
+**Statistics & econometrics**
+
+13. Samples and confidence intervals — standard error, t intervals, what “95%” means
+14. Hypothesis tests, p-values and power — type I and II errors
+15. Correlation and least-squares regression — slope, standard error, t, p, R², outliers
+16. Omitted variable bias — confounders and control variables
+17. Panel data and fixed effects — pooled vs within-country estimates
+18. Price indices and real values — Laspeyres, Paasche, Fisher, real wages
+
 ## How it's built
 
 Plain HTML, CSS and JavaScript — no frameworks, no build step. Open any `.html` file in a browser and it works.
