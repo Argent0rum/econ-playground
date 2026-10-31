@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quality control charts · Econ Playground</title>
+<meta name="description" content="X-bar, R and p control charts: set up control limits from a stable process, then shift it and see which samples fall out of control.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 21 of 21</div>
+<h1>Quality control charts</h1>
+<p class="lede">A control chart tells normal random variation apart from a real problem in a process. Build the limits from a stable period, then push the process off target and see when the chart notices.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="ln" style="background:var(--k1)"></i>Sample statistic</span><span class="key"><i class="ln" style="background:var(--k4)"></i>Centre line (KL)</span><span class="key"><i class="ln" style="background:var(--k2)"></i>Control limits (AKL / ZKL)</span><span class="key"><i class="sq" style="background:var(--k6)"></i>Out of control</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Chart</span></span><select id="chart"><option value="x" selected>X̄ chart — sample means</option><option value="r">R chart — sample ranges</option><option value="p">p chart — share of defects</option></select></label><label class="ctl"><span class="ctl-h"><span>Sample size n (X̄ and R)</span><output for="n" data-fmt="int" data-pre="" data-post=""></output></span><input type="range" id="n" min="2" max="10" step="1" value="5"></label><label class="ctl"><span class="ctl-h"><span>Mean shift after sample 20 (in σ)</span><output for="shift" data-fmt="dec2" data-pre="" data-post=" σ"></output></span><input type="range" id="shift" min="0" max="3" step="0.25" value="1"></label><label class="ctl"><span class="ctl-h"><span>Spread change after sample 20</span><output for="spread" data-fmt="int" data-pre="" data-post="% of σ"></output></span><input type="range" id="spread" min="50" max="250" step="10" value="100"></label><label class="ctl"><span class="ctl-h"><span>Defect rate after sample 20 (p chart)</span><output for="pd" data-fmt="" data-pre="" data-post="%"></output></span><input type="range" id="pd" min="1" max="15" step="0.5" value="4"></label><label class="ctl"><span class="ctl-h"><span>Random sample</span><output for="sd" data-fmt="int" data-pre="#" data-post=""></output></span><input type="range" id="sd" min="1" max="30" step="1" value="3"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"shift": 0, "spread": 100, "pd": 4}'>Stable process</button><button type="button" data-set='{"chart": "x", "shift": 1.5, "spread": 100}'>Machine drifts off target</button><button type="button" data-set='{"chart": "r", "shift": 0, "spread": 200}'>Worn tool: more variation</button><button type="button" data-set='{"chart": "p", "pd": 10}'>Supplier problem: more defects</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>Every process varies a little — a machine filling 500 g bags won't hit exactly 500 g each time. A <strong>control chart</strong> separates this <em>common-cause</em> variation from <em>special causes</em> (a worn tool, a bad batch) that need action.</p>
+<p>Take small samples (here n items every hour) and plot a statistic for each: the <strong>sample mean</strong> on an X̄ chart, the <strong>range</strong> (max − min) on an R chart, or the <strong>share of defective items</strong> on a p chart. The centre line <strong>KL</strong> is the long-run average from a stable period (the first 20 samples here). The control limits <strong>AKL</strong> (upper) and <strong>ZKL</strong> (lower) sit about three standard errors away, so a stable process stays inside them 99.7% of the time.</p>
+<p>For X̄ and R charts the limits use the average range R̄ and constants that depend on n: A₂, D₃ and D₄. For a p chart they come from the binomial standard error √(p̄(1 − p̄)/n).</p>
+<p>A point outside the limits signals a special cause. So does a run of 7 points in a row on the same side of the centre line — the process has drifted, even if no single point is extreme.</p>
+    <h2>Try this</h2>
+    <ol><li>Choose <b>Stable process</b> and change the random sample a few times. Points almost never leave the limits.</li><li>Choose <b>Machine drifts</b>. The X̄ chart flags it quickly; switch to the R chart and it shows nothing, because the spread didn't change.</li><li>Choose <b>Worn tool</b>: now the R chart reacts while the X̄ chart only gets jumpier. That is why X̄ and R charts are used together.</li><li>Raise the sample size n with a small shift (0.5 σ). Bigger samples give narrower limits and catch small drifts sooner.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Confusing control limits with specification limits. Control limits describe what the process does; specification limits describe what the customer wants.</li><li>Using constants for the wrong n — A₂, D₃ and D₄ depend on the sample size.</li><li>Recomputing the limits from data that already includes the problem. Set them on a stable period first.</li><li>Ignoring runs. Seven points on one side is a signal even if all are inside the limits.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">KL = X̿,  AKL/ZKL = X̿ ± A₂·R̄</p><p class="fnote">X̄ chart</p><p class="formula">KL = R̄,  AKL = D₄·R̄,  ZKL = D₃·R̄</p><p class="fnote">R chart</p><p class="formula">AKL/ZKL = p̄ ± 3·√(p̄(1 − p̄)/n)</p><p class="fnote">p chart (ZKL not below 0)</p><p class="formula">n = 5: A₂ = 0.577, D₃ = 0, D₄ = 2.114</p><p class="fnote">Constants for the default sample size</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Control chart</dt><dd lang="lv">Kontroles karte</dd><dt>Centre line</dt><dd lang="lv">Centrālā līnija (KL)</dd><dt>Upper control limit</dt><dd lang="lv">Augšējā kontroles līnija (AKL)</dd><dt>Lower control limit</dt><dd lang="lv">Zemākā kontroles līnija (ZKL)</dd><dt>Sample mean</dt><dd lang="lv">Izlases vidējais</dd><dt>Sample range</dt><dd lang="lv">Izlases amplitūda (R)</dd><dt>Share of defects</dt><dd lang="lv">Defektu īpatsvars</dd><dt>Special cause</dt><dd lang="lv">Īpašs (nejaušs) cēlonis</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc32.htm" target="_blank" rel="noopener">NIST/SEMATECH e-Handbook — Control charts</a><span>The standard reference, with constant tables</span></li><li><a href="https://asq.org/quality-resources/control-chart" target="_blank" rel="noopener">ASQ — Control chart</a><span>Short practical overview</span></li><li><a href="https://openstax.org/details/books/introductory-business-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Business Statistics</a><span>Sampling distributions behind the limits</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="time-series.html"><span>← Previous</span><b>Time series: growth rates, trend and seasonality</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const A2 = { 2: 1.880, 3: 1.023, 4: 0.729, 5: 0.577, 6: 0.483, 7: 0.419, 8: 0.373, 9: 0.337, 10: 0.308 };
+const D3 = { 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0.076, 8: 0.136, 9: 0.184, 10: 0.223 };
+const D4 = { 2: 3.267, 3: 2.574, 4: 2.282, 5: 2.114, 6: 2.004, 7: 1.924, 8: 1.864, 9: 1.816, 10: 1.777 };
+const K = 40, BASE = 20, MU = 500, SIG = 4, NP = 200, P0 = 0.04;
+const p = EP.plot("fig", { x: [0.5, K + 0.5], y: [480, 520], h: 420, xLabel: "Sample number", yLabel: "", title: "Control chart" });
+EP.controls(["chart", "n", "shift", "spread", "pd", "sd"], v => {
+  const rnd = ST.rng(v.sd * 131 + 7), n = v.n, stat = [];
+  for (let k = 1; k <= K; k++) {
+    const late = k > BASE;
+    if (v.chart === "p") { const pr = late ? v.pd / 100 : P0; let d = 0; for (let i = 0; i < NP; i++) if (rnd() < pr) d++; stat.push(d / NP); }
+    else { const mu = MU + (late ? v.shift * SIG : 0), sg = SIG * (late ? v.spread / 100 : 1), xs = []; for (let i = 0; i < n; i++) xs.push(mu + sg * ST.normal(rnd)); stat.push(v.chart === "x" ? xs.reduce((a, b) => a + b, 0) / n : Math.max(...xs) - Math.min(...xs)); stat[stat.length - 1] = { v: stat[stat.length - 1], r: Math.max(...xs) - Math.min(...xs), m: xs.reduce((a, b) => a + b, 0) / n }; }
+  }
+  let cl, ucl, lcl, vals, yl, fmtv;
+  if (v.chart === "p") {
+    vals = stat; const pbar = vals.slice(0, BASE).reduce((a, b) => a + b, 0) / BASE, se = Math.sqrt(pbar * (1 - pbar) / NP);
+    cl = pbar; ucl = pbar + 3 * se; lcl = Math.max(0, pbar - 3 * se); yl = "Share defective"; fmtv = x => EP.fmt(x * 100, 1) + "%";
+  } else {
+    const rbar = stat.slice(0, BASE).reduce((a, s) => a + s.r, 0) / BASE, xbb = stat.slice(0, BASE).reduce((a, s) => a + s.m, 0) / BASE;
+    if (v.chart === "x") { vals = stat.map(s => s.m); cl = xbb; ucl = xbb + A2[n] * rbar; lcl = xbb - A2[n] * rbar; yl = "Sample mean (g)"; }
+    else { vals = stat.map(s => s.r); cl = rbar; ucl = D4[n] * rbar; lcl = D3[n] * rbar; yl = "Sample range (g)"; }
+    fmtv = x => EP.fmt(x, 2) + " g";
+  }
+  const lo = Math.min(lcl, ...vals), hi = Math.max(ucl, ...vals), pad = (hi - lo) * 0.12 || 1;
+  p.setDomain(null, [lo - pad, hi + pad]);
+  p.begin().axes({ stepX: 5, fy: v.chart === "p" ? (x => EP.fmt(x * 100, 1) + "%") : undefined });
+  p.rect(BASE + 0.5, lo - pad, K + 0.5, hi + pad, "a6");
+  p.text(BASE + 1, hi + pad, "after the change →", "sm", "start", 2, 14);
+  p.seg(0.5, cl, K + 0.5, cl, "c4"); p.seg(0.5, ucl, K + 0.5, ucl, "c2 dash"); p.seg(0.5, lcl, K + 0.5, lcl, "c2 dash");
+  p.text(K + 0.5, ucl, "AKL", "l2", "end", 0, -6); p.text(K + 0.5, lcl, "ZKL", "l2", "end", 0, 15); p.text(K + 0.5, cl, "KL", "l4", "end", 0, -6);
+  p.line(vals.map((y, i) => [i + 1, y]), "c1 thin");
+  // signals: outside limits, or 7 in a row on one side
+  const out = vals.map(y => y > ucl || y < lcl), run = new Array(K).fill(false);
+  for (let i = 6; i < K; i++) { const w = vals.slice(i - 6, i + 1); if (w.every(y => y > cl) || w.every(y => y < cl)) for (let j = i - 6; j <= i; j++) run[j] = true; }
+  vals.forEach((y, i) => p.dot(i + 1, y, out[i] ? "d6" : run[i] ? "d5" : "d1", out[i] ? 6 : 4));
+  p.end();
+  const nOut = out.filter(Boolean).length, first = out.findIndex(Boolean), firstRun = run.findIndex(Boolean);
+  EP.readout([["Centre line (KL)", fmtv(cl)], ["Upper limit (AKL)", fmtv(ucl)], ["Lower limit (ZKL)", fmtv(lcl)], ["Points outside the limits", String(nOut), nOut ? "bad" : "good"], ["First signal at sample", first >= 0 ? String(first + 1) : firstRun >= 0 ? String(firstRun + 7) + " (run of 7)" : "none"], ["Limits based on", v.chart === "p" ? `samples 1–20, n = ${NP} items` : `samples 1–20, n = ${n}`]],
+    nOut || firstRun >= 0 ? `The chart signals a special cause${first >= 0 ? ` at sample <b>${first + 1}</b>` : ""}. ` + (first >= 0 && first < BASE ? "That one is in the stable period — about 1 in 370 points falls outside by pure chance. " : "") + (v.chart !== "p" && v.chart === "x" && v.shift === 0 && v.spread > 100 ? "The mean didn't move; check the R chart for the extra spread." : "")
+      : "Everything stays inside the limits with no long runs: the process looks <b>in control</b>." + (v.chart === "x" && v.spread > 130 ? " But the spread changed — the R chart would show it." : ""));
+});
+</script>
+</body>
+</html>

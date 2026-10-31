@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Time series: growth rates, trend and seasonality · Econ Playground</title>
+<meta name="description" content="Absolute increases, chain and base growth rates, average growth, moving averages and seasonal indices on a quarterly series you can shape.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Statistics &amp; econometrics · Topic 20 of 21</div>
+<h1>Time series: growth rates, trend and seasonality</h1>
+<p class="lede">A time series (dinamikas rinda) shows how a value changes over time. Shape a quarterly series and see how growth rates, the trend and the seasonal pattern are measured.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><svg id="fig2"></svg><figcaption><span class="key"><i class="ln" style="background:var(--k1)"></i>Quarterly values</span><span class="key"><i class="ln" style="background:var(--k2)"></i>Centred moving average</span><span class="key"><i class="ln" style="background:var(--k4)"></i>Linear trend</span><span class="key"><i class="sq" style="background:var(--k3)"></i>Chain growth rate, % (lower chart)</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>Trend per quarter</span><output for="tr" data-fmt="" data-pre="" data-post=" units"></output></span><input type="range" id="tr" min="-4" max="8" step="0.5" value="2"></label><label class="ctl"><span class="ctl-h"><span>Seasonal swing</span><output for="se" data-fmt="int" data-pre="±" data-post="%"></output></span><input type="range" id="se" min="0" max="30" step="1" value="12"></label><label class="ctl"><span class="ctl-h"><span>Random noise</span><output for="no" data-fmt="int" data-pre="" data-post="%"></output></span><input type="range" id="no" min="0" max="10" step="1" value="3"></label><label class="ctl"><span class="ctl-h"><span>Moving average</span></span><select id="ma"><option value="4" selected>4-quarter centred (removes seasonality)</option><option value="3">3-quarter</option><option value="2">2-quarter</option></select></label><label class="ctl"><span class="ctl-h"><span>Random sample</span><output for="sd" data-fmt="int" data-pre="#" data-post=""></output></span><input type="range" id="sd" min="1" max="30" step="1" value="7"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"tr": 2, "se": 3, "no": 2}'>Steady growth</button><button type="button" data-set='{"tr": 1, "se": 28, "no": 3}'>Tourism (strong summer peak)</button><button type="button" data-set='{"tr": 1.5, "se": 8, "no": 10}'>Noisy data</button><button type="button" data-set='{"tr": -3, "se": 10, "no": 3}'>Decline</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>A <strong>time series</strong> lists values of the same indicator over equal time steps — here 4 years of quarterly data (Q1 2023 to Q4 2026). Statistics on time series answer three questions: how much did it change, how fast, and what is just the season?</p>
+<p><strong>Absolute increase</strong> is the difference in units: <em>chain</em> (versus the previous period) or <em>base</em> (versus the first period). The <strong>growth coefficient</strong> (augšanas temps) is the ratio y<sub>t</sub>/y<sub>t−1</sub>, and the <strong>growth rate</strong> (pieauguma temps) is that ratio minus 100%. Averages over the whole series use the first and last values: the average absolute increase is (y<sub>n</sub> − y<sub>1</sub>)/(n − 1), and the average growth coefficient is the geometric mean (y<sub>n</sub>/y<sub>1</sub>)<sup>1/(n−1)</sup>.</p>
+<p>Quarterly data usually has a <strong>seasonal pattern</strong>. A <strong>4-quarter centred moving average</strong> averages over a whole year, so the seasons cancel out and the underlying direction shows. Dividing each value by the moving average and averaging by quarter gives <strong>seasonal indices</strong>: 120% means that quarter is typically 20% above the yearly level.</p>
+<p>A <strong>linear trend</strong> ŷ = a + b·t is the least-squares line through the data; b is the average change per quarter. Comparing a quarter with the same quarter a year earlier (year-on-year) is the quick way to remove seasonality without any modelling.</p>
+    <h2>Try this</h2>
+    <ol><li>Choose <b>Tourism</b>. The chain growth rate jumps up and down every quarter, but the moving average and the year-on-year rate tell a calm story.</li><li>Switch the moving average to <b>3-quarter</b>: it no longer cancels a 4-quarter season, so the wiggles come back.</li><li>Choose <b>Noisy data</b> and change the random sample. The trend line barely moves, single growth rates jump around.</li><li>Choose <b>Decline</b>: growth rates turn negative and the growth coefficient drops below 100%.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Averaging growth rates arithmetically. The average growth coefficient is a geometric mean of the chain coefficients, which equals (y<sub>n</sub>/y<sub>1</sub>)<sup>1/(n−1)</sup>.</li><li>Mixing up augšanas temps (ratio, e.g. 104%) and pieauguma temps (change, e.g. +4%).</li><li>Comparing Q3 with Q2 for seasonal data and calling it growth. Use year-on-year or seasonally adjusted figures.</li><li>Using an even moving average without centring it — it then sits between two quarters.</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">Δ<sub>chain</sub> = y<sub>t</sub> − y<sub>t−1</sub></p><p class="fnote">Chain absolute increase</p><p class="formula">Δ<sub>base</sub> = y<sub>t</sub> − y<sub>1</sub></p><p class="fnote">Base absolute increase</p><p class="formula">K = y<sub>t</sub> / y<sub>t−1</sub> × 100%</p><p class="fnote">Growth coefficient (augšanas temps)</p><p class="formula">T = K − 100%</p><p class="fnote">Growth rate (pieauguma temps)</p><p class="formula">Δ̄ = (y<sub>n</sub> − y<sub>1</sub>) / (n − 1)</p><p class="fnote">Average absolute increase</p><p class="formula">K̄ = (y<sub>n</sub> / y<sub>1</sub>)<sup>1/(n−1)</sup></p><p class="fnote">Average growth coefficient</p><p class="formula">ŷ = a + b·t</p><p class="fnote">Linear trend, fitted by least squares</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Time series</dt><dd lang="lv">Dinamikas rinda</dd><dt>Absolute increase</dt><dd lang="lv">Absolūtais pieaugums</dd><dt>Chain / base</dt><dd lang="lv">Ķēdes / bāzes</dd><dt>Growth coefficient</dt><dd lang="lv">Augšanas temps</dd><dt>Growth rate</dt><dd lang="lv">Pieauguma temps</dd><dt>Average growth rate</dt><dd lang="lv">Vidējais pieauguma temps</dd><dt>Moving average</dt><dd lang="lv">Slīdošais vidējais</dd><dt>Seasonal index</dt><dd lang="lv">Sezonalitātes indekss</dd><dt>Trend</dt><dd lang="lv">Trends</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://stat.gov.lv/" target="_blank" rel="noopener">CSP — Oficiālās statistikas portāls</a><span>Latvian quarterly data to try this on</span></li><li><a href="https://openstax.org/details/books/introductory-business-statistics-2e" target="_blank" rel="noopener">OpenStax Introductory Business Statistics</a><span>Background on descriptive statistics</span></li><li><a href="https://ec.europa.eu/eurostat/web/seasonal-adjustment" target="_blank" rel="noopener">Eurostat — Seasonal adjustment</a><span>How official statistics remove seasonality</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="index-numbers.html"><span>← Previous</span><b>Price indices and real values</b></a><a class="next" href="quality-control.html"><span>Next →</span><b>Quality control charts</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const N = 16, LBL = t => "Q" + (t % 4 + 1) + " '" + String(23 + Math.floor(t / 4));
+const p = EP.plot("fig", { x: [0.5, N + 0.5], y: [0, 200], h: 330, xLabel: "Quarter", yLabel: "Value", title: "Quarterly series with moving average and trend" });
+const p2 = EP.plot("fig2", { x: [0.5, N + 0.5], y: [-30, 30], h: 170, m: { l: 58, r: 24, t: 10, b: 30 }, yLabel: "Chain %", title: "Chain growth rate" });
+const SEAS = [-0.6, 0.1, 1, -0.5];
+EP.controls(["tr", "se", "no", "ma", "sd"], v => {
+  const rnd = ST.rng(v.sd * 97 + 11), y = [];
+  for (let t = 0; t < N; t++) { const level = 100 + v.tr * t; y.push(Math.max(1, level * (1 + v.se / 100 * SEAS[t % 4]) * (1 + v.no / 100 * ST.normal(rnd) * 0.6))); }
+  const w = +v.ma, ma = new Array(N).fill(null);
+  for (let t = 0; t < N; t++) {
+    if (w % 2 === 1) { const h = (w - 1) / 2; if (t - h >= 0 && t + h < N) { let s = 0; for (let k = t - h; k <= t + h; k++) s += y[k]; ma[t] = s / w; } }
+    else { const h = w / 2; if (t - h >= 0 && t + h < N) { let s = y[t - h] / 2 + y[t + h] / 2; for (let k = t - h + 1; k <= t + h - 1; k++) s += y[k]; ma[t] = s / w; } }
+  }
+  const ts = y.map((_, i) => i + 1), fit = ST.ols(ts, y);
+  const lo = Math.min(...y), hi = Math.max(...y);
+  p.setDomain(null, [Math.max(0, Math.floor(lo * 0.85 / 10) * 10), Math.ceil(hi * 1.08 / 10) * 10]);
+  p.begin().axes({ stepX: 1, fx: x => (x - 1) % 4 === 0 ? LBL(x - 1) : "" });
+  p.fn(t => fit.a + fit.b * t, "c4 dash", 1, N);
+  p.line(ma.map((m, i) => m === null ? null : [i + 1, m]).filter(Boolean), "c2");
+  p.line(y.map((val, i) => [i + 1, val]), "c1");
+  y.forEach((val, i) => p.dot(i + 1, val, "d1", 3.5));
+  p.end();
+  const ch = y.map((val, i) => i ? (val / y[i - 1] - 1) * 100 : null);
+  const amp = Math.max(10, ...ch.filter(x => x !== null).map(Math.abs)) * 1.15;
+  p2.setDomain(null, [-Math.ceil(amp / 5) * 5, Math.ceil(amp / 5) * 5]);
+  p2.begin().axes({ stepX: 1, fx: () => "" });
+  p2.seg(0.5, 0, N + 0.5, 0, "cg");
+  ch.forEach((g, i) => { if (g === null) return; const x1 = p2.sx(i + 1 - 0.32), x2 = p2.sx(i + 1 + 0.32), ya = p2.sy(Math.max(0, g)), yb = p2.sy(Math.min(0, g)); p2.raw(`<rect class="barf ${g >= 0 ? "b3" : "b2"}" x="${x1.toFixed(1)}" y="${ya.toFixed(1)}" width="${(x2 - x1).toFixed(1)}" height="${Math.max(1, yb - ya).toFixed(1)}" rx="2"/>`); });
+  p2.end();
+  // seasonal indices from the 4-quarter centred MA (ratio-to-moving-average)
+  const ma4 = new Array(N).fill(null); for (let t = 2; t < N - 2; t++) ma4[t] = (y[t - 2] / 2 + y[t - 1] + y[t] + y[t + 1] + y[t + 2] / 2) / 4;
+  const si = [0, 1, 2, 3].map(q => { const r = []; for (let t = q; t < N; t += 4) if (ma4[t]) r.push(y[t] / ma4[t]); return r.reduce((a, b) => a + b, 0) / r.length; });
+  const sc = 4 / si.reduce((a, b) => a + b, 0), sIdx = si.map(s => s * sc * 100);
+  const last = N - 1, avgAbs = (y[last] - y[0]) / (N - 1), avgK = Math.pow(y[last] / y[0], 1 / (N - 1)) * 100, yoy = (y[last] / y[last - 4] - 1) * 100;
+  const sg = x => (x >= 0 ? "+" : "−") + EP.fmt(Math.abs(x), 1);
+  EP.readout([["Last quarter, chain growth", sg(ch[last]) + "%", ch[last] >= 0 ? "good" : "bad"], ["Last quarter, year-on-year", sg(yoy) + "%", yoy >= 0 ? "good" : "bad"], ["Base absolute increase", sg(y[last] - y[0])], ["Average absolute increase", sg(avgAbs) + " / qtr"], ["Average growth coefficient", EP.fmt(avgK, 2) + "%"], ["Trend slope b", sg(fit.b) + " / qtr"], ["Seasonal index Q1 · Q2 · Q3 · Q4", sIdx.map(s => EP.fmt(s, 0)).join(" · ")]],
+    `Over four years the series grew from ${EP.fmt(y[0], 1)} to ${EP.fmt(y[last], 1)}: on average <b>${EP.fmt(avgK - 100, 2)}% per quarter</b>. ` + (v.se >= 10 ? `Q3 is typically ${EP.fmt(sIdx[2] - 100, 0)}% above the yearly level, so quarter-to-quarter rates swing a lot; the year-on-year rate (${sg(yoy)}%) is the fairer comparison.` : "With a weak season, chain growth rates already give a fair picture."));
+});
+</script>
+</body>
+</html>

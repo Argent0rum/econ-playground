@@ -22,15 +22,18 @@ Interactive economics explainers. Every topic is built around a graph you can ch
 10. Aggregate demand and aggregate supply
 11. IS–LM: fiscal and monetary policy
 12. Compound interest, inflation and real value
+13. Money creation and the money multiplier — reserves, cash holdings and deposit creation
 
 **Statistics & econometrics**
 
-13. Samples and confidence intervals — standard error, t intervals, what “95%” means
-14. Hypothesis tests, p-values and power — type I and II errors
-15. Correlation and least-squares regression — slope, standard error, t, p, R², outliers
-16. Omitted variable bias — confounders and control variables
-17. Panel data and fixed effects — pooled vs within-country estimates
-18. Price indices and real values — Laspeyres, Paasche, Fisher, real wages
+14. Samples and confidence intervals — standard error, t intervals, what “95%” means
+15. Hypothesis tests, p-values and power — type I and II errors
+16. Correlation and least-squares regression — slope, standard error, t, p, R², outliers
+17. Omitted variable bias — confounders and control variables
+18. Panel data and fixed effects — pooled vs within-country estimates
+19. Price indices and real values — Laspeyres, Paasche, Fisher, real wages
+20. Time series — absolute and relative growth, average growth rate, moving averages, seasonal indices, trend
+21. Quality control charts — X̄, R and p charts with control limits
 
 ## How it's built
 

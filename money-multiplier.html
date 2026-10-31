@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Money creation and the money multiplier · Econ Playground</title>
+<meta name="description" content="See how commercial banks turn central bank money into a much larger money supply, and what reserves and cash holdings do to the multiplier.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="site-in"><a class="logo" href="./"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2v21h21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6 L22 20" stroke="var(--k1)" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20 L22 6" stroke="var(--k2)" stroke-width="2.4" stroke-linecap="round"/></svg>Econ<span>Playground</span></a>
+<nav><a href="./#micro">Microeconomics</a><a href="./#macro">Macroeconomics</a><a href="./#stats">Statistics</a><a href="https://github.com/Argent0rum/econ-playground">Source code</a></nav></div></header>
+<main class="wrap">
+<div class="crumb">Macroeconomics · Topic 13 of 21</div>
+<h1>Money creation and the money multiplier</h1>
+<p class="lede">When a bank lends, it creates a new deposit somewhere else in the system. Follow the rounds of lending and see how far a single injection of central bank money can stretch.</p>
+<section class="lab" aria-label="Interactive graph">
+  <figure class="fig"><svg id="fig"></svg><figcaption><span class="key"><i class="sq" style="background:var(--k1)"></i>Money supply after each round</span><span class="key"><i class="ln" style="background:var(--k2)"></i>Final money supply (limit)</span><span class="key"><i class="ln" style="background:var(--k3)"></i>Monetary base (central bank money)</span></figcaption></figure>
+  <div class="panel">
+    <div class="box"><h3>Change the inputs</h3><label class="ctl"><span class="ctl-h"><span>New central bank money (ΔMB)</span><output for="mb" data-fmt="int" data-pre="€" data-post=" m"></output></span><input type="range" id="mb" min="100" max="1000" step="50" value="500"></label><label class="ctl"><span class="ctl-h"><span>Required reserve ratio (r)</span><output for="rr" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="rr" min="1" max="25" step="1" value="10"></label><label class="ctl"><span class="ctl-h"><span>Excess reserves banks keep (e)</span><output for="er" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="er" min="0" max="20" step="1" value="0"></label><label class="ctl"><span class="ctl-h"><span>Cash people keep per €1 of deposits (c)</span><output for="cr" data-fmt="pct" data-pre="" data-post=""></output></span><input type="range" id="cr" min="0" max="60" step="1" value="0"></label></div>
+    <div class="box"><h3>Scenarios</h3><div class="scen"><button type="button" data-set='{"rr": 10, "er": 0, "cr": 0}'>Textbook (r = 10%)</button><button type="button" data-set='{"rr": 1, "er": 2, "cr": 15}'>Eurozone today (r = 1%)</button><button type="button" data-set='{"rr": 1, "er": 18, "cr": 20}'>Crisis: banks hoard reserves</button><button type="button" data-set='{"rr": 10, "er": 2, "cr": 50}'>Cash-heavy economy</button></div></div>
+    <div class="box readout" id="readout" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="reading">
+  <div class="text">
+    <h2>The idea</h2>
+    <p>The <strong>monetary base</strong> (MB) is the money the central bank creates directly: cash plus the reserves banks hold at the central bank. The <strong>money supply</strong> (M1, M2) is much larger, because most money is bank deposits — and banks create deposits when they lend.</p>
+<p>Say €500 m of new central bank money ends up deposited in a bank. The bank must keep a share <em>r</em> as <strong>required reserves</strong>, may keep extra <strong>excess reserves</strong> <em>e</em>, and lends out the rest. The borrower spends it, the seller deposits it in another bank, and that bank lends again. Each round is smaller, and the total converges to a limit.</p>
+<p>Two leaks shrink the multiplier: reserves that banks don't lend (<em>r</em> and <em>e</em>) and <strong>cash</strong> that people keep outside banks (<em>c</em>). With no cash and only required reserves, the multiplier is simply 1/<em>r</em>.</p>
+<p>In practice the chain runs the other way round too: banks first decide to lend (creating a deposit), then find the reserves they need. The multiplier is still a good way to see what limits money creation — reserve rules, banks' caution and the public's demand for cash. In 2008–09, banks hoarded reserves, so huge increases in the monetary base barely moved the money supply.</p>
+    <h2>Try this</h2>
+    <ol><li>Start with <b>Textbook</b>: r = 10% gives a multiplier of 10, so €500 m becomes €5,000 m.</li><li>Choose <b>Eurozone today</b>. The ECB's reserve requirement is only 1%, yet cash holdings and excess reserves keep the multiplier far below 100.</li><li>Choose <b>Crisis</b>. Watch the curve flatten after a few rounds — that is why quantitative easing raised the base much more than the money supply.</li><li>Raise <b>c</b> step by step and notice it lowers the multiplier even when reserve rules stay the same.</li></ol>
+    <h2>Common mistakes</h2>
+    <ul><li>Confusing the money multiplier with the Keynesian (spending) multiplier. One multiplies the money stock, the other multiplies GDP.</li><li>Forgetting the cash leak: the full multiplier is (1 + c)/(r + e + c), not 1/r.</li><li>Thinking reserves are "lent out". Banks lend by creating deposits; reserves move between banks when the money is spent.</li><li>Mixing up M0/MB (base money) and M1/M2 (money supply).</li></ul>
+  </div>
+  <aside class="side">
+    <div class="box"><h3>Key formulas</h3><p class="formula">m = (1 + c) / (r + e + c)</p><p class="fnote">Money multiplier with cash and excess reserves</p><p class="formula">m = 1 / r</p><p class="fnote">Simple case: no cash, no excess reserves</p><p class="formula">ΔM = m × ΔMB</p><p class="fnote">Change in money supply</p><p class="formula">MB = C + R</p><p class="fnote">Monetary base = cash + bank reserves</p><p class="formula">M1 = C + D</p><p class="fnote">Money supply = cash + deposits</p></div>
+    <div class="box"><h3>Terms in Latvian</h3><dl class="terms"><dt>Monetary base</dt><dd lang="lv">Monetārā bāze (M0)</dd><dt>Money supply</dt><dd lang="lv">Naudas piedāvājums</dd><dt>Money multiplier</dt><dd lang="lv">Naudas multiplikators</dd><dt>Required reserves</dt><dd lang="lv">Obligātās rezerves</dd><dt>Reserve ratio</dt><dd lang="lv">Obligāto rezervju norma</dd><dt>Excess reserves</dt><dd lang="lv">Virsrezerves</dd><dt>Cash-to-deposit ratio</dt><dd lang="lv">Skaidrās naudas un depozītu attiecība</dd><dt>Deposit creation</dt><dd lang="lv">Depozītu radīšana</dd></dl></div>
+    <div class="box"><h3>Read more</h3><ul class="reads"><li><a href="https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy" target="_blank" rel="noopener">Bank of England — Money creation in the modern economy</a><span>How banks really create money</span></li><li><a href="https://www.ecb.europa.eu/mopo/implement/mr/html/index.en.html" target="_blank" rel="noopener">ECB — Minimum reserves</a><span>The euro area reserve requirement</span></li><li><a href="https://openstax.org/books/principles-economics-3e/pages/27-4-how-banks-create-money" target="_blank" rel="noopener">OpenStax Principles of Economics 3e</a><span>How banks create money</span></li></ul></div>
+  </aside>
+</section>
+<nav class="pn"><a href="interest-inflation.html"><span>← Previous</span><b>Compound interest, inflation and real value</b></a><a class="next" href="confidence-intervals.html"><span>Next →</span><b>Samples and confidence intervals</b></a></nav>
+</main>
+<footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
+<script src="assets/plot.js"></script>
+<script src="assets/stats.js"></script>
+<script>
+const p = EP.plot("fig", { x: [0, 20], y: [0, 6000], h: 420, xLabel: "Lending round", yLabel: "€ million", title: "Money supply after each round of lending" });
+EP.controls(["mb", "rr", "er", "cr"], v => {
+  const B = v.mb, r = v.rr / 100, e = v.er / 100, c = v.cr / 100;
+  const m = (1 + c) / (r + e + c), M = B * m, q = (1 - r - e) / (1 + c);
+  const D = B / (r + e + c), C = c * D, R = (r + e) * D;
+  const rounds = []; let cum = 0; for (let k = 0; k <= 20; k++) { cum += B * Math.pow(q, k); rounds.push(cum); }
+  const top = Math.max(M, rounds[20]) * 1.1;
+  p.setDomain(null, [0, Math.max(600, Math.ceil(top / 500) * 500)]);
+  p.begin().axes({ stepX: 2 });
+  rounds.forEach((val, k) => { const x1 = p.sx(k - 0.35), x2 = p.sx(k + 0.35); p.raw(`<rect class="barf" x="${x1.toFixed(1)}" y="${p.sy(val).toFixed(1)}" width="${(x2 - x1).toFixed(1)}" height="${(p.sy(0) - p.sy(val)).toFixed(1)}" rx="2"/>`); });
+  p.seg(-0.5, M, 20.5, M, "c2 dash"); p.text(20, M, "Limit " + EP.money(M, 0) + " m", "l2", "end", 0, -8);
+  p.seg(-0.5, B, 20.5, B, "c3 dash"); p.text(20, B, "Base " + EP.money(B, 0) + " m", "l3", "end", 0, -8);
+  p.end();
+  const half = rounds.findIndex(x => x >= M * 0.9);
+  EP.readout([["Money multiplier", EP.fmt(m, 2)], ["Final money supply", EP.money(M, 0) + " m"], ["…of which deposits", EP.money(D, 0) + " m"], ["…of which cash", EP.money(C, 0) + " m"], ["Bank reserves", EP.money(R, 0) + " m"], ["Rounds to reach 90%", half >= 0 ? String(half) : "more than 20"]],
+    `Each euro of central bank money supports <b>${EP.fmt(m, 2)}</b> euros of money in the economy. ` + (c > 0 ? `People keep ${v.cr}% of their deposits as cash, which leaks out of the lending chain. ` : "") + (e > 0.05 ? `Banks sitting on ${v.er}% excess reserves slow the process down a lot. ` : "") + (m > 8 ? "Low leaks mean a long, slow chain of lending." : "Strong leaks mean the chain stops after a few rounds."));
+});
+</script>
+</body>
+</html>
