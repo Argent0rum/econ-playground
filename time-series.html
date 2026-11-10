@@ -46,6 +46,8 @@
 </main>
 <footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
 <script src="assets/plot.js"></script>
+<script src="assets/lv.js"></script>
+<script src="assets/i18n.js"></script>
 <script src="assets/stats.js"></script>
 <script>
 const N = 16, LBL = t => "Q" + (t % 4 + 1) + " '" + String(23 + Math.floor(t / 4));
@@ -83,7 +85,7 @@ EP.controls(["tr", "se", "no", "ma", "sd"], v => {
   const last = N - 1, avgAbs = (y[last] - y[0]) / (N - 1), avgK = Math.pow(y[last] / y[0], 1 / (N - 1)) * 100, yoy = (y[last] / y[last - 4] - 1) * 100;
   const sg = x => (x >= 0 ? "+" : "−") + EP.fmt(Math.abs(x), 1);
   EP.readout([["Last quarter, chain growth", sg(ch[last]) + "%", ch[last] >= 0 ? "good" : "bad"], ["Last quarter, year-on-year", sg(yoy) + "%", yoy >= 0 ? "good" : "bad"], ["Base absolute increase", sg(y[last] - y[0])], ["Average absolute increase", sg(avgAbs) + " / qtr"], ["Average growth coefficient", EP.fmt(avgK, 2) + "%"], ["Trend slope b", sg(fit.b) + " / qtr"], ["Seasonal index Q1 · Q2 · Q3 · Q4", sIdx.map(s => EP.fmt(s, 0)).join(" · ")]],
-    `Over four years the series grew from ${EP.fmt(y[0], 1)} to ${EP.fmt(y[last], 1)}: on average <b>${EP.fmt(avgK - 100, 2)}% per quarter</b>. ` + (v.se >= 10 ? `Q3 is typically ${EP.fmt(sIdx[2] - 100, 0)}% above the yearly level, so quarter-to-quarter rates swing a lot; the year-on-year rate (${sg(yoy)}%) is the fairer comparison.` : "With a weak season, chain growth rates already give a fair picture."));
+    EP.lang === "lv" ? (`Četros gados rinda pieauga no ${EP.fmt(y[0], 1)} līdz ${EP.fmt(y[last], 1)}: vidēji <b>${EP.fmt(avgK - 100, 2)}% ceturksnī</b>. ` + (v.se >= 10 ? `3. ceturksnis parasti ir ${EP.fmt(sIdx[2] - 100, 0)}% virs gada līmeņa, tāpēc ceturkšņa pieauguma tempi stipri svārstās; salīdzinājums pret iepriekšējo gadu (${sg(yoy)}%) ir godīgāks.` : "Ja sezonalitāte ir vāja, ķēdes pieauguma tempi jau dod godīgu priekšstatu.")) : (`Over four years the series grew from ${EP.fmt(y[0], 1)} to ${EP.fmt(y[last], 1)}: on average <b>${EP.fmt(avgK - 100, 2)}% per quarter</b>. ` + (v.se >= 10 ? `Q3 is typically ${EP.fmt(sIdx[2] - 100, 0)}% above the yearly level, so quarter-to-quarter rates swing a lot; the year-on-year rate (${sg(yoy)}%) is the fairer comparison.` : "With a weak season, chain growth rates already give a fair picture.")));
 });
 </script>
 </body>

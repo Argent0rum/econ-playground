@@ -186,3 +186,6 @@ footer .site-in { padding-block: 18px; }
 .barf.b3 { fill: var(--k3); } .barf.b4 { fill: var(--k4); }
 .lb.l4 { fill: var(--k4); }
 .terms dt, .terms dd { overflow-wrap: anywhere; }
+.langbtn { font: 700 .78rem/1 var(--font-head); border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 10px; cursor: pointer; margin-left: 6px; }
+.langbtn:hover { border-color: var(--accent); color: var(--accent); }
+.lvnote { font: 400 .88rem/1.4 var(--font-head); color: var(--muted); margin: 8px 0 0; }

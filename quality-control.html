@@ -46,6 +46,8 @@
 </main>
 <footer><div class="site-in">Econ Playground · made by Argent0rum while studying economics at the University of Latvia · <a href="https://github.com/Argent0rum/econ-playground">source on GitHub</a></div></footer>
 <script src="assets/plot.js"></script>
+<script src="assets/lv.js"></script>
+<script src="assets/i18n.js"></script>
 <script src="assets/stats.js"></script>
 <script>
 const A2 = { 2: 1.880, 3: 1.023, 4: 0.729, 5: 0.577, 6: 0.483, 7: 0.419, 8: 0.373, 9: 0.337, 10: 0.308 };
@@ -85,8 +87,9 @@ EP.controls(["chart", "n", "shift", "spread", "pd", "sd"], v => {
   p.end();
   const nOut = out.filter(Boolean).length, first = out.findIndex(Boolean), firstRun = run.findIndex(Boolean);
   EP.readout([["Centre line (KL)", fmtv(cl)], ["Upper limit (AKL)", fmtv(ucl)], ["Lower limit (ZKL)", fmtv(lcl)], ["Points outside the limits", String(nOut), nOut ? "bad" : "good"], ["First signal at sample", first >= 0 ? String(first + 1) : firstRun >= 0 ? String(firstRun + 7) + " (run of 7)" : "none"], ["Limits based on", v.chart === "p" ? `samples 1–20, n = ${NP} items` : `samples 1–20, n = ${n}`]],
-    nOut || firstRun >= 0 ? `The chart signals a special cause${first >= 0 ? ` at sample <b>${first + 1}</b>` : ""}. ` + (first >= 0 && first < BASE ? "That one is in the stable period — about 1 in 370 points falls outside by pure chance. " : "") + (v.chart !== "p" && v.chart === "x" && v.shift === 0 && v.spread > 100 ? "The mean didn't move; check the R chart for the extra spread." : "")
-      : "Everything stays inside the limits with no long runs: the process looks <b>in control</b>." + (v.chart === "x" && v.spread > 130 ? " But the spread changed — the R chart would show it." : ""));
+    EP.lang === "lv" ? (nOut || firstRun >= 0 ? `Karte signalizē par īpašu cēloni${first >= 0 ? ` <b>${first + 1}.</b> izlasē` : ""}. ` + (first >= 0 && first < BASE ? "Šis punkts ir stabilajā periodā — apmēram 1 no 370 punktiem izkrīt ārpus robežām tīras nejaušības dēļ. " : "") + (v.chart === "x" && v.shift === 0 && v.spread > 100 ? "Vidējais nemainījās; lielāko izkliedi meklē R kartē." : "")
+      : "Viss paliek robežās un nav garu sēriju: process ir <b>kontrolēts</b>." + (v.chart === "x" && v.spread > 130 ? " Taču izkliede mainījās — R karte to parādītu." : "")) : (nOut || firstRun >= 0 ? `The chart signals a special cause${first >= 0 ? ` at sample <b>${first + 1}</b>` : ""}. ` + (first >= 0 && first < BASE ? "That one is in the stable period — about 1 in 370 points falls outside by pure chance. " : "") + (v.chart !== "p" && v.chart === "x" && v.shift === 0 && v.spread > 100 ? "The mean didn't move; check the R chart for the extra spread." : "")
+      : "Everything stays inside the limits with no long runs: the process looks <b>in control</b>." + (v.chart === "x" && v.spread > 130 ? " But the spread changed — the R chart would show it." : "")));
 });
 </script>
 </body>
